@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import stp.demonick.basecncprog.model.Detail;
 import stp.demonick.basecncprog.repository.MemStore;
+import stp.demonick.basecncprog.utils.TextFormat;
 
 import java.io.*;
 import java.util.Collection;
@@ -12,9 +13,12 @@ import java.util.Collection;
 @Service
 public class ModelService {
     private final MemStore store;
+    private final TextFormat format;
 
-    public ModelService(MemStore store) {
+
+    public ModelService(MemStore store, TextFormat format) {
         this.store = store;
+        this.format = format;
     }
 
     public Collection<Detail> findAllDetails() {
@@ -29,9 +33,10 @@ public class ModelService {
         StringBuilder builder = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
         try (InputStream inputStream = file.getInputStream()) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,"Cp1251"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "Cp1251"));
             reader.lines().forEach(builder::append);
-            Detail model3 = mapper.readValue(builder.toString().replace("\\","\\\\"), Detail.class);
+            Detail model3 = mapper.readValue(format.updateJson(builder), Detail.class);
+            model3.setPartName(format.getPartName(model3.getPath()));
             store.save(model3);
             System.out.println(model3);
         } catch (IOException e) {

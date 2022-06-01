@@ -12,7 +12,6 @@ import java.util.List;
 public class Program {
     private int id;
     private String programName;
-    private Machine machine;
     private String programPath;
     private String ugVersion;
     private String machineName;

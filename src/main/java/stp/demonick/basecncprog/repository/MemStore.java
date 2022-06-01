@@ -9,7 +9,7 @@ import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
-public class MemStore implements Store {
+public class MemStore implements Store<Detail> {
     private Map<Integer, Detail> models = new TreeMap<>();
 
     private static AtomicInteger modelId = new AtomicInteger(0);
@@ -20,10 +20,12 @@ public class MemStore implements Store {
         return models.values();
     }
 
+
     @Override
     public Detail findById(int id) {
         return models.get(id);
     }
+
 
     @Override
     public void save(Detail model) {

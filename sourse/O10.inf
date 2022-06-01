@@ -1,0 +1,145 @@
+{
+"partName" : "O10",
+"path" : "D:\work\stpProgs\M6-AP2TM_04.02.01\New\osnastka\M6-AP2TM_04.02.01_full.prt",
+"programs" : [{
+"programName" : "2_UST_CHERN",
+"programPath" : "D:\âàõ\1\",
+"machineName" : "Wele_AA1165",
+"ugVersion" : "NX 1965.2502",
+"operations" : [
+{
+"programmNumber" : "O1001",
+"operationName" :  "ÏËÎÑÊ_Ð-Ð206_×ÅÐÍ",
+"operationType" : "Volume Based 2.5D Milling",
+"spindleSpeed" : 450.0,
+"feedRate" : 450.0,
+"stockPart" : 0.00000000000000000,
+"stockFloor" : 1.2,
+"machineTime" : 7.8505592313949526,
+ 
+"tool" : {
+"toolType" : "Milling Tool-5 Parameters",
+"toolName" : "FR_52R6",
+"toolDiametr" : 52.0,
+"cornerRadius" : 6.0,
+"fluteLength" : 50.0,
+"length" : 160.0,
+"fluteNumber" : 2,
+"toolTapperAngle" : 0.00000000000000000,
+"toolNumber" :  1
+}
+},
+{
+"programmNumber" : "O1002",
+"operationName" :  "ÏËÎÑÊ_Ð-Ð206_×ÈÑÒ",
+"operationType" : "Volume Based 2.5D Milling",
+"spindleSpeed" : 800.0,
+"feedRate" : 500.0,
+"stockPart" : 0.00000000000000000,
+"stockFloor" : 1.0,
+"machineTime" : 9.6813860607629199,
+ 
+"tool" : {
+"toolType" : "Milling Tool-5 Parameters",
+"toolName" : "FR50",
+"toolDiametr" : 50.0,
+"cornerRadius" : 0.00000000000000000,
+"fluteLength" : 50.0,
+"length" : 75.0,
+"fluteNumber" : 4,
+"toolTapperAngle" : 0.00000000000000000,
+"toolNumber" :  2
+}
+},
+{
+"programmNumber" : "O1003",
+"operationName" :  "PLANAR_MILL",
+"operationType" : "Planar Milling",
+"spindleSpeed" : 350.0,
+"feedRate" : 350.0,
+"stockPart" : 1.0,
+"stockFloor" : 0.00000000000000000,
+"machineTime" : 19.714762896628812,
+ 
+"tool" : {
+"toolType" : "Milling Tool-5 Parameters",
+"toolName" : "FR_D63",
+"toolDiametr" : 63.0,
+"cornerRadius" : 0.00000000000000000,
+"fluteLength" : 12.0,
+"length" : 210.0,
+"fluteNumber" : 5,
+"toolTapperAngle" : 0.00000000000000000,
+"toolNumber" :  3
+}
+},
+{
+"programmNumber" : "O1004",
+"operationName" :  "ZLEVEL_PROFILE_COPY",
+"operationType" : "Z-Level Milling",
+"spindleSpeed" : 350.0,
+"feedRate" : 350.0,
+"stockPart" : 1.0,
+"stockFloor" : 0.00000000000000000,
+"machineTime" : 16.40362519070451,
+ 
+"tool" : {
+"toolType" : "Milling Tool-5 Parameters",
+"toolName" : "FR_D63",
+"toolDiametr" : 63.0,
+"cornerRadius" : 0.00000000000000000,
+"fluteLength" : 12.0,
+"length" : 210.0,
+"fluteNumber" : 5,
+"toolTapperAngle" : 0.00000000000000000,
+"toolNumber" :  3
+}
+},
+{
+"programmNumber" : "O1005",
+"operationName" :  "ZLEVEL_PROFILE_COPY_COPY",
+"operationType" : "Z-Level Milling",
+"spindleSpeed" : 350.0,
+"feedRate" : 350.0,
+"stockPart" : 1.0,
+"stockFloor" : 0.00000000000000000,
+"machineTime" : 33.983659836947183,
+ 
+"tool" : {
+"toolType" : "Milling Tool-5 Parameters",
+"toolName" : "FR_D63",
+"toolDiametr" : 63.0,
+"cornerRadius" : 0.00000000000000000,
+"fluteLength" : 12.0,
+"length" : 210.0,
+"fluteNumber" : 5,
+"toolTapperAngle" : 0.00000000000000000,
+"toolNumber" :  3
+}
+},
+{
+"programmNumber" : "O1006",
+"operationName" :  "ZLEVEL_PROFILE",
+"operationType" : "Z-Level Milling",
+"spindleSpeed" : 350.0,
+"feedRate" : 350.0,
+"stockPart" : 1.0,
+"stockFloor" : 0.00000000000000000,
+"machineTime" : 40.196543161367387,
+ 
+"tool" : {
+"toolType" : "Milling Tool-5 Parameters",
+"toolName" : "FR_D63",
+"toolDiametr" : 63.0,
+"cornerRadius" : 0.00000000000000000,
+"fluteLength" : 12.0,
+"length" : 210.0,
+"fluteNumber" : 5,
+"toolTapperAngle" : 0.00000000000000000,
+"toolNumber" :  3
+}
+},
+]
+}
+]
+}

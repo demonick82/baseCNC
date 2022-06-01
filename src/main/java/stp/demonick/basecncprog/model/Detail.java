@@ -12,7 +12,7 @@ import java.util.List;
 public class Detail {
     private int id;
     private String partName;
-    private int versionId;
+    private String name;
 
     @EqualsAndHashCode.Exclude
     private String path;

@@ -4,12 +4,13 @@ import stp.demonick.basecncprog.model.Detail;
 
 import java.util.Collection;
 
-public interface Store {
-    Collection<Detail> findAllModels();
+public interface Store<T> {
 
-    Detail findById(int id);
+    Collection<T> findAllModels();
 
-    void save(Detail model);
+    void save(T domain);
+
+    T findById(int id);
 
     void delete(int id);
 
