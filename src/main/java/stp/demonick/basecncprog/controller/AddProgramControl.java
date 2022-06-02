@@ -5,17 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import stp.demonick.basecncprog.service.ModelService;
-
-import java.io.*;
+import stp.demonick.basecncprog.service.DetailService;
 
 @Controller
 public class AddProgramControl {
 
-    private final ModelService modelService;
+    private final DetailService modelService;
 
-    public AddProgramControl(ModelService modelService) {
+    public AddProgramControl(DetailService modelService) {
         this.modelService = modelService;
     }
 

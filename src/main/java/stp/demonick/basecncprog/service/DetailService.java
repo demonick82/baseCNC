@@ -4,25 +4,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import stp.demonick.basecncprog.model.Detail;
-import stp.demonick.basecncprog.repository.MemStore;
+import stp.demonick.basecncprog.repository.MemDetailRepository;
 import stp.demonick.basecncprog.utils.TextFormat;
 
 import java.io.*;
 import java.util.Collection;
 
 @Service
-public class ModelService {
-    private final MemStore store;
+public class DetailService {
+    private final MemDetailRepository store;
     private final TextFormat format;
 
 
-    public ModelService(MemStore store, TextFormat format) {
+    public DetailService(MemDetailRepository store, TextFormat format) {
         this.store = store;
         this.format = format;
     }
 
     public Collection<Detail> findAllDetails() {
-        return store.findAllModels();
+        return store.findAll();
     }
 
     public void save(Detail detail) {
@@ -38,7 +38,7 @@ public class ModelService {
             Detail model3 = mapper.readValue(format.updateJson(builder), Detail.class);
             model3.setPartName(format.getPartName(model3.getPath()));
             store.save(model3);
-            System.out.println(model3);
+           // System.out.println(model3);
         } catch (IOException e) {
             e.printStackTrace();
         }

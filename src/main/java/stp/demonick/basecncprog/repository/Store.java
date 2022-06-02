@@ -1,12 +1,10 @@
 package stp.demonick.basecncprog.repository;
 
-import stp.demonick.basecncprog.model.Detail;
-
 import java.util.Collection;
 
 public interface Store<T> {
 
-    Collection<T> findAllModels();
+    Collection<T> findAll();
 
     void save(T domain);
 
