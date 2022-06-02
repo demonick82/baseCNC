@@ -17,5 +17,6 @@ public class TextFormat {
         Path path1 = Paths.get(path);
         String fullName = path1.getFileName().toString();
         return fullName.substring(0, fullName.lastIndexOf("."));
+
     }
 }
