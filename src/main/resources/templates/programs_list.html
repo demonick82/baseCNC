@@ -46,7 +46,7 @@
             <td><a th:text="${program.machineName}"></a></td>
             <td><a th:text="${program.ugVersion}"></a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/operations/(id=${program.id})}">Список операций</a></td>
-            <td><a class="btn btn-outline-dark" th:href="@{/}">Список инструмента</a></td>
+            <td><a class="btn btn-outline-dark" th:href="@{/tools/(id=${program.id})}">Список инструмента</a></td>
 
         </tr>
         </tbody>

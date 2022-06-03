@@ -12,21 +12,21 @@ import java.util.Collection;
 
 @Service
 public class DetailService {
-    private final MemDetailRepository store;
+    private final MemDetailRepository detailRepository;
     private final TextFormat format;
 
 
     public DetailService(MemDetailRepository store, TextFormat format) {
-        this.store = store;
+        this.detailRepository = store;
         this.format = format;
     }
 
     public Collection<Detail> findAllDetails() {
-        return store.findAll();
+        return detailRepository.findAll();
     }
 
     public void save(Detail detail) {
-        store.save(detail);
+        detailRepository.save(detail);
     }
 
     public void addModel(MultipartFile file) {
@@ -37,10 +37,13 @@ public class DetailService {
             reader.lines().forEach(builder::append);
             Detail model3 = mapper.readValue(format.updateJson(builder), Detail.class);
             model3.setPartName(format.getPartName(model3.getPath()));
-            store.save(model3);
-           // System.out.println(model3);
+            detailRepository.save(model3);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Detail findDetailById(int id) {
+        return detailRepository.findById(id);
     }
 }

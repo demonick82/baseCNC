@@ -20,7 +20,7 @@ public class Detail {
     @EqualsAndHashCode.Exclude
     private List<Program> programs = new ArrayList<>();
 
-    public void addMachine(Program program) {
+    public void addProgram(Program program) {
         programs.add(program);
     }
 }

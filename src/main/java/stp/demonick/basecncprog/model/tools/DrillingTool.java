@@ -5,25 +5,12 @@ import java.util.StringJoiner;
 public class DrillingTool extends Tool {
     private double toolPointAngle;
 
-    private static DrillingTool of(int toolNumber, String toolName, double toolDiametr, double length,
-                              double fluteLength, int fluteNumber, double toolPointAngle) {
-        DrillingTool drillingTool = new DrillingTool();
-        drillingTool.setFluteNumber(toolNumber);
-        drillingTool.setToolName(toolName);
-        drillingTool.setToolDiametr(toolDiametr);
-        drillingTool.setLength(length);
-        drillingTool.setFluteLength(fluteLength);
-        drillingTool.setFluteNumber(fluteNumber);
-        drillingTool.toolPointAngle = toolPointAngle;
-        return drillingTool;
-    }
-
     public double getToolPointAngle() {
         return toolPointAngle;
     }
 
     public void setToolPointAngle(double toolPointAngle) {
-        this.toolPointAngle = toolPointAngle;
+        this.toolPointAngle = Math.toDegrees(toolPointAngle);
     }
 
     @Override

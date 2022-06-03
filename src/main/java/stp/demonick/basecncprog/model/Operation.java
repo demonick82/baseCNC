@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import stp.demonick.basecncprog.model.tools.Tool;
 
+import java.util.Locale;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -21,5 +22,7 @@ public class Operation {
     private double machineTime;
     private Tool tool;
 
-
+    public void setOperationName(String operationName) {
+        this.operationName = operationName.replace("_"," ").trim();
+    }
 }
