@@ -24,10 +24,10 @@ public class ToolListController {
         this.toolsService = toolsService;
     }
 
-
     @GetMapping({"/tools"})
     public String viewTool(@RequestParam("id") int id, Model model) {
-        model.addAttribute("tools", toolsService.findAllToolOfOperation(id));
+        toolsService.findMillingTools(id).forEach(System.out::println);
+        model.addAttribute("tools", toolsService.findMillingTools(id));
         return "tool_list";
     }
 }

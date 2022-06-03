@@ -2,6 +2,7 @@ package stp.demonick.basecncprog.service;
 
 import org.springframework.stereotype.Service;
 import stp.demonick.basecncprog.model.Operation;
+import stp.demonick.basecncprog.model.tools.MillingTool;
 import stp.demonick.basecncprog.model.tools.Tool;
 import stp.demonick.basecncprog.repository.MemProgramRepository;
 
@@ -14,16 +15,26 @@ import java.util.TreeSet;
 public class ToolsService {
 
     private final MemProgramRepository programRepository;
+    private Set<Tool> tools = new HashSet<>();
 
     public ToolsService(MemProgramRepository programRepository) {
         this.programRepository = programRepository;
     }
 
-    public Set<Tool> findAllToolOfOperation(int id) {
-        Set<Tool> tools = new TreeSet<>(Comparator.comparingInt(Tool::getToolNumber));
+    private void findAllToolOfOperation(int id) {
         for (Operation operation : programRepository.findById(id).getOperations()) {
             tools.add(operation.getTool());
         }
-        return tools;
+    }
+
+    public Set<MillingTool> findMillingTools(int id) {
+        Set<MillingTool> millingTools=new TreeSet<>(Comparator.comparingInt(MillingTool::getToolNumber));
+        findAllToolOfOperation(id);
+        for (Tool tool : tools) {
+            if (tool.getClass().equals("MillingTool")) {
+                millingTools.add((MillingTool) tool);
+            }
+        }
+        return millingTools;
     }
 }
