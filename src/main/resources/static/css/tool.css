@@ -1,32 +1,35 @@
 .mainBlank {
-    border-style: solid;
-    border-color: #000000;
     border-width: thin;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.name {
-    border-color: #000000;
-    text-align: center;
-    vertical-align: top;
-    margin-bottom: 50px;
-    font-family: "Book Antiqua";
-    font-size: 30pt;
-}
-
-.tableMill {
+.table, .tableHead {
     border-collapse: collapse;
     border-spacing: 50px;
     width: 100%;
 }
 
-.tableMill th, .tableMill td {
-    border: 1px solid #888;
+.table th, .table td, .tableHead th, .tableHead td {
+    border: 1px solid #000000;
     padding: 10px;
     text-align: center;
     vertical-align: middle;
     position: relative;
-    font-family: "Book Antiqua";
+    font-family: "Times New Roman"
+}
+
+.time {
+    position: relative;
+    width: 70%;
+}
+
+.operationTime {
+    position: relative;
+    width: 30%;
+}
+
+h3, h2 {
+    text-align: center;
 }

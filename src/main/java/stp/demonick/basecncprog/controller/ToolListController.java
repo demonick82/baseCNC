@@ -5,14 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import stp.demonick.basecncprog.model.tools.Tool;
-import stp.demonick.basecncprog.service.ProgramService;
 import stp.demonick.basecncprog.service.ToolsService;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
+import java.util.function.Predicate;
+
 
 @Controller
 @SessionAttributes(value = "detailName")
@@ -26,8 +22,12 @@ public class ToolListController {
 
     @GetMapping({"/tools"})
     public String viewTool(@RequestParam("id") int id, Model model) {
-        toolsService.findMillingTools(id).forEach(System.out::println);
-        model.addAttribute("tools", toolsService.findMillingTools(id));
+        model.addAttribute("millingTools", toolsService.findCustomTool(id,x->x.equals("MillingTool")));
+        model.addAttribute("drillingTools", toolsService.findCustomTool(id,x->x.equals("DrillingTool")));
+        model.addAttribute("spotDrillingTools", toolsService.findCustomTool(id,x->x.equals("SpotDrillingTool")));
+        model.addAttribute("champherMills", toolsService.findCustomTool(id,x->x.equals("ChampherMill")));
+        model.addAttribute("tapTools", toolsService.findCustomTool(id,x->x.equals("TapTool")));
+        model.addAttribute("threadMillTools", toolsService.findCustomTool(id,x->x.equals("ThreadMillTool")));
         return "tool_list";
     }
 }

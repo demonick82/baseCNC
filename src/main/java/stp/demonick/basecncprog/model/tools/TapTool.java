@@ -1,30 +1,16 @@
 package stp.demonick.basecncprog.model.tools;
 
-import java.util.Objects;
 import java.util.StringJoiner;
 
 public class TapTool extends Tool {
-    private double pitch;
+    private double toolPitch;
 
-    private static TapTool of(int toolNumber, String toolName, double toolDiametr, double length,
-                              double fluteLength, int fluteNumber, double pitch) {
-        TapTool tapTool = new TapTool();
-        tapTool.setFluteNumber(toolNumber);
-        tapTool.setToolName(toolName);
-        tapTool.setToolDiametr(toolDiametr);
-        tapTool.setLength(length);
-        tapTool.setFluteLength(fluteLength);
-        tapTool.setFluteNumber(fluteNumber);
-        tapTool.pitch = pitch;
-        return tapTool;
+    public double getToolPitch() {
+        return toolPitch;
     }
 
-    public double getPitch() {
-        return pitch;
-    }
-
-    public void setPitch(double pitch) {
-        this.pitch = pitch;
+    public void setToolPitch(double toolPitch) {
+        this.toolPitch = toolPitch;
     }
 
     @Override
@@ -37,7 +23,7 @@ public class TapTool extends Tool {
                 .add("length=" + getLength())
                 .add("fluteLength=" + getFluteLength())
                 .add("fluteNumber=" + getFluteNumber())
-                .add("pitch=" + pitch)
+                .add("pitch=" + toolPitch)
                 .toString();
     }
 }

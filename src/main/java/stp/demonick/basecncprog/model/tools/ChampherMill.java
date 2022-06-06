@@ -6,26 +6,13 @@ public class ChampherMill extends Tool {
     private double toolTapperAngle;
     private double chamferLength;
 
-    private static ChampherMill of(int toolNumber, String toolName, double toolDiametr, double length,
-                                   double fluteLength, int fluteNumber, double toolTapperAngle,double chamferLength) {
-        ChampherMill champherMill = new ChampherMill();
-        champherMill.setFluteNumber(toolNumber);
-        champherMill.setToolName(toolName);
-        champherMill.setToolDiametr(toolDiametr);
-        champherMill.setLength(length);
-        champherMill.setFluteLength(fluteLength);
-        champherMill.setFluteNumber(fluteNumber);
-        champherMill.toolTapperAngle = toolTapperAngle;
-        champherMill.chamferLength = chamferLength;
-        return champherMill;
-    }
 
     public double getToolTapperAngle() {
         return toolTapperAngle;
     }
 
     public void setToolTapperAngle(double toolTapperAngle) {
-        this.toolTapperAngle = toolTapperAngle;
+        this.toolTapperAngle = Math.toDegrees(toolTapperAngle);
     }
 
     public double getChamferLength() {

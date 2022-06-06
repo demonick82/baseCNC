@@ -8,13 +8,178 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
           crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/tool.css}"/>
     <title>Список инструментов</title>
 </head>
 <body>
-<div th:each="tool : ${tools}">
-    <div><a th:text="${tool}"></a></div>
+<div class="mainBlank">
+    <h2 th:text="'Список инструмента на деталь '+${detailName}"></h2>
+    <br>
+    <div th:if="${millingTools.size>0}">
+        <H3>Фрезы</H3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="10%">№ инструмента</th>
+                <th width="25%">Название инструмента</th>
+                <th width="15%">Диаметр инструмента</th>
+                <th width="15%">Радиус при вершине</th>
+                <th width="15%">Вылет</th>
+                <th width="15%">Длинна режущей части</th>
+                <th>Число зубьев</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="millingTool : ${millingTools}">
+                <td><a th:text="${millingTool.toolNumber}"></a></td>
+                <td><a th:text="${millingTool.toolName}"></a></td>
+                <td><a th:text="${millingTool.toolDiametr}"></a></td>
+                <td><a th:text="${millingTool.cornerRadius}"></a></td>
+                <td><a th:text="${millingTool.length}"></a></td>
+                <td><a th:text="${millingTool.fluteLength}"></a></td>
+                <td><a th:text="${millingTool.fluteNumber}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${drillingTools.size>0}">
+        <H3>Сверла</H3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="10%">№ инструмента</th>
+                <th width="25%">Название инструмента</th>
+                <th width="15%">Диаметр интрумента</th>
+                <th width="15%">Угол сверла</th>
+                <th width="15%">Вылет</th>
+                <th width="15%">Длинна режущей части</th>
+                <th>Число зубьев</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="drillingTool : ${drillingTools}">
+                <td><a th:text="${drillingTool.toolNumber}"></a></td>
+                <td><a th:text="${drillingTool.toolName}"></a></td>
+                <td><a th:text="${drillingTool.toolDiametr}"></a></td>
+                <td><a th:text="${#numbers.formatDecimal(drillingTool.toolPointAngle,1,1)}"></a></td>
+                <td><a th:text="${drillingTool.length}"></a></td>
+                <td><a th:text="${drillingTool.fluteLength}"></a></td>
+                <td><a th:text="${drillingTool.fluteNumber}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${spotDrillingTools.size>0}">
+        <H3>Центровки</H3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="10%">№ инструмента</th>
+                <th>Название инструмента</th>
+                <th>Диаметр интрумента</th>
+                <th>Угол сверла</th>
+                <th>Вылет</th>
+                <th>Длинна режущей части</th>
+                <th>Число зубьев</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="spotDrillingTool : ${spotDrillingTools}">
+                <td><a th:text="${spotDrillingTool.toolNumber}"></a></td>
+                <td><a th:text="${spotDrillingTool.toolName}"></a></td>
+                <td><a th:text="${spotDrillingTool.toolDiametr}"></a></td>
+                <td><a th:text="${#numbers.formatDecimal(spotDrillingTool.toolPointAngle,1,1)}"></a></td>
+                <td><a th:text="${spotDrillingTool.length}"></a></td>
+                <td><a th:text="${spotDrillingTool.fluteLength}"></a></td>
+                <td><a th:text="${spotDrillingTool.fluteNumber}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${champherMills.size>0}">
+        <H3>Фасочные фрезы</H3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="10%">№ инструмента</th>
+                <th>Название инструмента</th>
+                <th>Диаметр интрумента</th>
+                <th>Угол фаски</th>
+                <th>Размер фаски</th>
+                <th>Вылет</th>
+                <th>Длинна режущей части</th>
+                <th>Число зубьев</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="champherMill : ${champherMills}">
+                <td><a th:text="${champherMill.toolNumber}"></a></td>
+                <td><a th:text="${champherMill.toolName}"></a></td>
+                <td><a th:text="${champherMill.toolDiametr}"></a></td>
+                <td><a th:text="${#numbers.formatDecimal(champherMill.toolTapperAngle,1,1)}"></a></td>
+                <td><a th:text="${champherMill.chamferLength}"></a></td>
+                <td><a th:text="${champherMill.length}"></a></td>
+                <td><a th:text="${champherMill.fluteLength}"></a></td>
+                <td><a th:text="${champherMill.fluteNumber}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${tapTools.size>0}">
+        <H3>Метчики</H3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="10%">№ инструмента</th>
+                <th width="10%">Название инструмента</th>
+                <th width="10%">Диаметр интрумента</th>
+                <th width="10%">Шаг резьбы</th>
+                <th width="10%">Вылет</th>
+                <th width="10%">Длина режущей части</th>
+                <th width="10%">Число зубьев</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tapTool : ${tapTools}">
+                <td><a th:text="${tapTool.toolNumber}"></a></td>
+                <td><a th:text="${tapTool.toolName}"></a></td>
+                <td><a th:text="${tapTool.toolDiametr}"></a></td>
+                <td><a th:text="${tapTool.toolPitch}"></a></td>
+                <td><a th:text="${tapTool.length}"></a></td>
+                <td><a th:text="${tapTool.fluteLength}"></a></td>
+                <td><a th:text="${tapTool.fluteNumber}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${threadMillTools.size>0}">
+        <H3>Резьбофрезы</H3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="10%">№ инструмента</th>
+                <th>Название инструмента</th>
+                <th>Диаметр интрумента</th>
+                <th>Шаг резьбы</th>
+                <th>Вылет</th>
+                <th>Длина режущей части</th>
+                <th>Число зубьев</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="threadMillTool : ${threadMillTools}">
+                <td><a th:text="${threadMillTool.toolNumber}"></a></td>
+                <td><a th:text="${threadMillTool.toolName}"></a></td>
+                <td><a th:text="${threadMillTool.toolDiametr}"></a></td>
+                <td><a th:text="${threadMillTool.toolPitch}"></a></td>
+                <td><a th:text="${threadMillTool.length}"></a></td>
+                <td><a th:text="${threadMillTool.fluteLength}"></a></td>
+                <td><a th:text="${threadMillTool.fluteNumber}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
