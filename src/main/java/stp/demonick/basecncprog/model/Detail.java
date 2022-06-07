@@ -10,12 +10,17 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Detail {
+
     private int id;
-    private String partName;
+    private String drawingNumber;
     private String name;
 
-    @EqualsAndHashCode.Exclude
-    private String path;
+    public static Detail of(String drawingNumber, String name) {
+        Detail detail = new Detail();
+        detail.drawingNumber = drawingNumber;
+        detail.name = name;
+        return detail;
+    }
 
     @EqualsAndHashCode.Exclude
     private List<Program> programs = new ArrayList<>();

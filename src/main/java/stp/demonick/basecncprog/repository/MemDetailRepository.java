@@ -12,47 +12,40 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class MemDetailRepository implements Store<Detail> {
-    private Map<Integer, Detail> models = new TreeMap<>();
+    private final Map<Integer, Detail> details = new TreeMap<>();
 
-    private static AtomicInteger modelId = new AtomicInteger(0);
-    private static AtomicInteger programsId = new AtomicInteger(0);
-    private static AtomicInteger operationsId = new AtomicInteger(0);
-    private static AtomicInteger toolsId = new AtomicInteger(0);
+    private static final AtomicInteger detailsId = new AtomicInteger(0);
 
+    public MemDetailRepository() {
+        Detail detail1 = Detail.of("M6-AP2TM_04.02.01", "Дозатор");
+        detail1.setId(detailsId.incrementAndGet());
+        details.put(detail1.getId(), detail1);
+    }
 
     @Override
     public Collection<Detail> findAll() {
-        return models.values();
+        return details.values();
     }
 
 
     @Override
     public Detail findById(int id) {
-        return models.get(id);
+        return details.get(id);
     }
 
 
     @Override
     public void save(Detail detail) {
         if (detail.getId() == 0) {
-            detail.setId(modelId.incrementAndGet());
+            detail.setId(detailsId.incrementAndGet());
         }
-        setIdOperations(detail);
-        models.put(detail.getId(), detail);
+        details.put(detail.getId(), detail);
     }
 
     @Override
     public void delete(int id) {
-        models.remove(id);
+        details.remove(id);
     }
 
-    private void setIdOperations(Detail detail) {
-        for (Program program : detail.getPrograms()) {
-            program.setId(programsId.incrementAndGet());
-            for (Operation operation : program.getOperations()) {
-                operation.setId(operationsId.incrementAndGet());
-                operation.getTool().setId(toolsId.incrementAndGet());
-            }
-        }
-    }
+
 }

@@ -5,12 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import stp.demonick.basecncprog.service.DetailService;
 import stp.demonick.basecncprog.service.ProgramService;
 
 @Controller
-@SessionAttributes(value = "detailName")
+@SessionAttributes({"detail","id"})
+
 public class ProgramListControl {
     private final DetailService detailService;
     private final ProgramService programService;
@@ -22,8 +22,9 @@ public class ProgramListControl {
 
     @GetMapping({"/programs"})
     public String viewOperations(@RequestParam("id") int id, Model model) {
-        model.addAttribute("detailName", detailService.findDetailById(id).getPartName());
+        model.addAttribute("detail", detailService.findDetailById(id));
         model.addAttribute("programs", programService.findAllProgramForDetailId(id));
+        model.addAttribute("id", id);
         return "programs_list";
     }
 }

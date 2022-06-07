@@ -13,12 +13,10 @@ import java.util.Collection;
 @Service
 public class DetailService {
     private final MemDetailRepository detailRepository;
-    private final TextFormat format;
 
 
-    public DetailService(MemDetailRepository store, TextFormat format) {
+    public DetailService(MemDetailRepository store) {
         this.detailRepository = store;
-        this.format = format;
     }
 
     public Collection<Detail> findAllDetails() {
@@ -27,20 +25,6 @@ public class DetailService {
 
     public void save(Detail detail) {
         detailRepository.save(detail);
-    }
-
-    public void addModel(MultipartFile file) {
-        StringBuilder builder = new StringBuilder();
-        ObjectMapper mapper = new ObjectMapper();
-        try (InputStream inputStream = file.getInputStream()) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "Cp1251"));
-            reader.lines().forEach(builder::append);
-            Detail model3 = mapper.readValue(format.updateJson(builder), Detail.class);
-            model3.setPartName(format.getPartName(model3.getPath()));
-            detailRepository.save(model3);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public Detail findDetailById(int id) {

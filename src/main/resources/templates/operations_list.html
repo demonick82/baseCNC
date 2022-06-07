@@ -22,6 +22,7 @@
                 <th width="10%">Подпись</th>
                 <th width="10%">Дата</th>
                 <th>№ Детали</th>
+                <th>Наименование</th>
                 <th>Операция</th>
                 <th>Станок</th>
             </tr>
@@ -29,10 +30,11 @@
             <tr>
                 <td>Полянский</td>
                 <td></td>
-                <td></td>
-                <td th:text="${detailName}"></td>
+                <td th:text="${date}"></td>
+                <td th:text="${detail.drawingNumber}"></td>
+                <td th:text="${detail.name}"></td>
                 <td th:text="${program.programName}"></td>
-                <td th:text="${program.machineName}"></td>
+                <td th:text="${program.machine.machineName}"></td>
             </tr>
         </table>
         <table class="table">

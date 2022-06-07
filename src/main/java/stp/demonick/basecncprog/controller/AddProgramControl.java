@@ -1,29 +1,33 @@
 package stp.demonick.basecncprog.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import stp.demonick.basecncprog.service.DetailService;
+import stp.demonick.basecncprog.service.ProgramService;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@SessionAttributes({"id"})
 public class AddProgramControl {
 
-    private final DetailService modelService;
+    private final ProgramService programService;
 
-    public AddProgramControl(DetailService modelService) {
-        this.modelService = modelService;
+    public AddProgramControl(ProgramService programService) {
+        this.programService = programService;
     }
 
-    @GetMapping({"/add"})
+    @GetMapping({"/addProgram"})
     public String add() {
         return "add_pogramm";
     }
 
     @PostMapping("/upload")
-    public String getFile(@RequestParam("file") MultipartFile file) {
-        modelService.addModel(file);
-        return "redirect:/";
+    public String getFile(@RequestParam("file") MultipartFile file, Model model) {
+        int id = (int) model.getAttribute("id");
+        programService.addProgram(file, id);
+        return "redirect:/programs/?id="+id;
     }
 }

@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import stp.demonick.basecncprog.service.ToolsService;
 
-import java.util.function.Predicate;
 
 
 @Controller
-@SessionAttributes(value = "detailName")
+@SessionAttributes(value = "detail")
 public class ToolListController {
 
     private final ToolsService toolsService;

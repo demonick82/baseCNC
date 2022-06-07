@@ -3,8 +3,7 @@ package stp.demonick.basecncprog.model;
 import lombok.Data;
 
 @Data
-public class Machine {
+public class Programmer {
     private int id;
-    private String machineName;
-
+    private String name;
 }

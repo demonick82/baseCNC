@@ -14,7 +14,15 @@ public class Program {
     private String programName;
     private String programPath;
     private String ugVersion;
-    private String machineName;
+
+    @EqualsAndHashCode.Exclude
+    private String modelPath;
+    private Machine machine;
+
+    @EqualsAndHashCode.Exclude
+    private OperationBlank operationBlank;
+    private Programmer programmer;
+
 
     @EqualsAndHashCode.Exclude
     private List<Operation> operations = new ArrayList<>();
@@ -23,6 +31,4 @@ public class Program {
     public void addOperation(Operation operation) {
         operations.add(operation);
     }
-
-
 }
