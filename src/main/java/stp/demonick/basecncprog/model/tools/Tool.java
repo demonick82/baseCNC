@@ -18,8 +18,7 @@ import java.util.StringJoiner;
         @JsonSubTypes.Type(value = ChampherMill.class, name = "Chamfer Mill"),
         @JsonSubTypes.Type(value = ThreadMillTool.class, name = "Thread Mill"),
         @JsonSubTypes.Type(value = TapTool.class, name = "Tap"),
-
-
+        @JsonSubTypes.Type(value = BoreTool.class, name = "Расточной резец"),
 })
 
 @JsonIgnoreProperties(ignoreUnknown = true)

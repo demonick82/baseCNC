@@ -136,7 +136,7 @@
                 <th width="15%">Шаг резьбы</th>
                 <th width="15%">Вылет</th>
                 <th width="15%">Длина режущей части</th>
-                <th >Число зубьев</th>
+                <th>Число зубьев</th>
             </tr>
             </thead>
             <tbody>
@@ -175,6 +175,33 @@
                 <td><a th:text="${threadMillTool.length}"></a></td>
                 <td><a th:text="${threadMillTool.fluteLength}"></a></td>
                 <td><a th:text="${threadMillTool.fluteNumber}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${boreTools.size>0}">
+        <H3>Расточные резцы </H3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="10%">№ инструмента</th>
+                <th width="25%">Название инструмента</th>
+                <th width="15%">Диаметр инструмента</th>
+                <th width="15%">Радиус при вершине</th>
+                <th width="15%">Вылет</th>
+                <th width="15%">Длинна режущей части</th>
+                <th>Число зубьев</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="boreTool : ${boreTools}">
+                <td><a th:text="${boreTool.toolNumber}"></a></td>
+                <td><a th:text="${boreTool.toolName}"></a></td>
+                <td><a th:text="${boreTool.toolDiametr}"></a></td>
+                <td><a th:text="${boreTool.cornerRadius}"></a></td>
+                <td><a th:text="${boreTool.length}"></a></td>
+                <td><a th:text="${boreTool.fluteLength}"></a></td>
+                <td><a th:text="${boreTool.fluteNumber}"></a></td>
             </tr>
             </tbody>
         </table>

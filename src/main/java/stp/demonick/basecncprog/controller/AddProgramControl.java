@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import stp.demonick.basecncprog.service.ProgramService;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @SessionAttributes({"id"})
 public class AddProgramControl {
