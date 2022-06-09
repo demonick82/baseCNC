@@ -37,6 +37,8 @@
             <th scope="col">Разработчик</th>
             <th scope="col">Станок</th>
             <th scope="col">Версия NX</th>
+            <th scope="col">Файлы NX</th>
+            <th scope="col">Файлы УП</th>
             <th scope="col">Список операций</th>
             <th scope="col">Список инструмента</th>
         </tr>
@@ -47,6 +49,8 @@
             <td><a th:text="${program.programmer.name}"></a></td>
             <td><a th:text="${program.machine.machineName}"></a></td>
             <td><a th:text="${program.ugVersion}"></a></td>
+            <td ><a class="nav-link active" th:href="@{/viewPrt/(id=${program.id})}">Открыть</a></td>
+            <td ><a class="nav-link active" th:href="@{/viewCNC/(id=${program.id})}">Открыть</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/operations/(id=${program.id})}">Список операций</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/tools/(id=${program.id})}">Список инструмента</a></td>
 

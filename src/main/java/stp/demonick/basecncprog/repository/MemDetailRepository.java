@@ -20,6 +20,9 @@ public class MemDetailRepository implements Store<Detail> {
         Detail detail1 = Detail.of("M6-AP2TM_04.02.01", "Дозатор");
         detail1.setId(detailsId.incrementAndGet());
         details.put(detail1.getId(), detail1);
+        Detail detail2 = Detail.of("ИЯЕИЛ8.034.374", "Корпус");
+        detail2.setId(detailsId.incrementAndGet());
+        details.put(detail2.getId(), detail2);
     }
 
     @Override

@@ -14,8 +14,6 @@ public class Program {
     private String programName;
     private String programPath;
     private String ugVersion;
-
-    @EqualsAndHashCode.Exclude
     private String modelPath;
     private Machine machine;
 

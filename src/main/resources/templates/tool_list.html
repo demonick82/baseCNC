@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="mainBlank">
-    <h2 th:text="'Список инструмента на деталь '+${detail.drawingNumber}"></h2>
+    <h2 th:text="'Список инструмента на деталь '+${detail.drawingNumber}+ ' '+ ${detail.name}"></h2>
     <br>
     <div th:if="${millingTools.size>0}">
         <H3>Фрезы</H3>
@@ -77,7 +77,7 @@
                 <th width="10%">№ инструмента</th>
                 <th width="25%">Название инструмента</th>
                 <th width="15%">Диаметр интрумента</th>
-                <th width="15%">Угол сверла</th>
+                <th width="15%">Угол центровки</th>
                 <th width="15%">Вылет</th>
                 <th width="15%">Длинна режущей части</th>
                 <th>Число зубьев</th>

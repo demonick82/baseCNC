@@ -5,38 +5,35 @@ import java.io.IOException;
 import java.nio.file.*;
 
 public class TestCopyFiles {
-    private final String MAIN_PATH = "D:\\work\\BaseCNC";
 
-    public void copyPrtFiles(String fileName, String detailNumber, String operationName, String machineName,
-                             String endFolderName) throws IOException {
-        Path originalPath = Paths.get(fileName);
-        Path newDir = Paths.get(MAIN_PATH, detailNumber, operationName, machineName,
-                getPartName(originalPath.getFileName()), endFolderName);
-        Files.createDirectories(newDir);
-        File[] files = new File(originalPath.getParent().toString()).listFiles();
-        if (files != null) {
-            for (File file1 : files) {
-                Files.copy(file1.toPath(), newDir.resolve(file1.getName()), StandardCopyOption.REPLACE_EXISTING);
-            }
-        }
-    }
+    public void copyAllFiles(String prtFileName, String cncDir, String detailNumber, String operationName, String machineName) throws IOException {
+        String mainPath = "D:\\work\\BaseCNC";
+        Path originalPrtPath = Paths.get(prtFileName);
+        Path originalCNCDir = Paths.get(cncDir);
+        Path newPrtDir = Paths.get(mainPath, detailNumber, operationName, machineName,
+                getPartName(originalPrtPath.getFileName()), "Part_Man");
+        Path newCNCDir = Paths.get(mainPath, detailNumber, operationName, machineName,
+                getPartName(originalPrtPath.getFileName()), "CNC");
+        Files.createDirectories(newPrtDir);
+        Files.createDirectories(newCNCDir);
+        copyFiles(originalPrtPath.getParent(), newPrtDir);
+        copyFiles(originalCNCDir, newCNCDir);
 
-    public void copyCNCFiles(String fileName, String detailNumber, String operationName, String machineName,
-                             String endFolderName) throws IOException {
-        Path originalPath = Paths.get(fileName);
-        Path newDir = Paths.get(MAIN_PATH, detailNumber, operationName, machineName,
-                getPartName(originalPath.getFileName()), endFolderName);
-        Files.createDirectories(newDir);
-        File[] files = new File(originalPath.getParent().toString()).listFiles();
-        if (files != null) {
-            for (File file1 : files) {
-                Files.copy(file1.toPath(), newDir.resolve(file1.getName()), StandardCopyOption.REPLACE_EXISTING);
-            }
-        }
     }
 
     private void copyFiles(Path oldPath, Path newPath) {
-
+        File[] files = new File(oldPath.toString()).listFiles();
+        if (files != null) {
+            for (File file1 : files) {
+                if (file1.isFile()) {
+                    try {
+                        Files.copy(file1.toPath(), newPath.resolve(file1.getName()), StandardCopyOption.REPLACE_EXISTING);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 
     private String getPartName(Path path) {
@@ -46,11 +43,14 @@ public class TestCopyFiles {
 
     public static void main(String[] args) throws IOException {
         String s = "D:\\work\\stpProgs\\M6-AP2TM_04.02.01\\New\\OP80\\Part_Man\\M6-AP2TM_04.02.01_DOZATOR_Man_OP80_FREZAD80_SPINNERU620.prt";
+        String s1 = "D:\\work\\stpProgs\\M6-AP2TM_04.02.01\\New\\OP80\\CNC\\3_UST\\";
         String name = "M6-AP2TM_04.02.01";
         String operationName = "OP 30";
         String machineName = "Hizion";
-        String endFolder = "Part_Man";
+        String endFolderPrt = "Part_Man";
+        String endFolderCnc = "CNC";
         TestCopyFiles copyFiles = new TestCopyFiles();
-        copyFiles.copyPrtFiles(s, name, operationName, machineName, endFolder);
+        copyFiles.copyAllFiles(s, s1, name, operationName, machineName);
+
     }
 }

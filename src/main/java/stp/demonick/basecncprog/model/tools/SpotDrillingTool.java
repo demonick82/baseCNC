@@ -12,7 +12,7 @@ public class SpotDrillingTool extends Tool {
     }
 
     public void setToolPointAngle(double toolPointAngle) {
-        this.toolPointAngle = toolPointAngle;
+        this.toolPointAngle = Math.toDegrees(toolPointAngle);
     }
 
     @Override
