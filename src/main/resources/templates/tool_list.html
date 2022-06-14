@@ -125,6 +125,37 @@
             </tbody>
         </table>
     </div>
+    <div th:if="${tCutterMills.size>0}">
+        <H3>Т-образные фрезы</H3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="10%">№ инструмента</th>
+                <th width="25%">Название инструмента</th>
+                <th width="15%">Диаметр инструмента</th>
+                <th width="15%">Верхний радиус</th>
+                <th width="15%">Нижний радиус</th>
+                <th width="15%">Диаметр хвостовика</th>
+                <th width="15%">Вылет</th>
+                <th width="15%">Длинна режущей кромки</th>
+                <th>Число зубьев</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tCutterMill : ${tCutterMills}">
+                <td><a th:text="${tCutterMill.toolNumber}"></a></td>
+                <td><a th:text="${tCutterMill.toolName}"></a></td>
+                <td><a th:text="${tCutterMill.toolDiametr}"></a></td>
+                <td><a th:text="${tCutterMill.upperCornerRadius}"></a></td>
+                <td><a th:text="${tCutterMill.lowerCornerRadius}"></a></td>
+                <td><a th:text="${tCutterMill.shankDiameter}"></a></td>
+                <td><a th:text="${tCutterMill.length}"></a></td>
+                <td><a th:text="${tCutterMill.fluteLength}"></a></td>
+                <td><a th:text="${tCutterMill.fluteNumber}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div th:if="${tapTools.size>0}">
         <H3>Метчики</H3>
         <table class="table">

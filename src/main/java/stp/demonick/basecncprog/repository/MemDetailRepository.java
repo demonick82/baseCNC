@@ -2,8 +2,6 @@ package stp.demonick.basecncprog.repository;
 
 import org.springframework.stereotype.Repository;
 import stp.demonick.basecncprog.model.Detail;
-import stp.demonick.basecncprog.model.Operation;
-import stp.demonick.basecncprog.model.Program;
 
 import java.util.Collection;
 import java.util.Map;
@@ -23,6 +21,10 @@ public class MemDetailRepository implements Store<Detail> {
         Detail detail2 = Detail.of("ИЯЕИЛ8.034.374", "Корпус");
         detail2.setId(detailsId.incrementAndGet());
         details.put(detail2.getId(), detail2);
+        Detail detail3 = Detail.of("941-5310-049-01", "Коллектор концевая часть");
+        detail3.setId(detailsId.incrementAndGet());
+        details.put(detail3.getId(), detail3);
+
     }
 
     @Override
