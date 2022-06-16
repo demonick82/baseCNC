@@ -2,9 +2,14 @@ package stp.demonick.basecncprog.model;
 
 import lombok.Data;
 
-@Data
-public class Machine {
-    private int id;
-    private String machineName;
+import javax.persistence.*;
 
+@Data
+@Entity
+@Table(name = "machines")
+public class Machine {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String machineName;
 }

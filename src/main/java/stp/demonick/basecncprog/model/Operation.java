@@ -4,14 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import stp.demonick.basecncprog.model.tools.Tool;
 
-import java.util.Locale;
-import java.util.Objects;
+import javax.persistence.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
+@Entity
+@Table(name = "operations")
 public class Operation {
-    private int id;
-    private String programmNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String programNumber;
     private String path;
     private String operationName;
     private String operationType;
@@ -19,10 +22,13 @@ public class Operation {
     private double feedRate;
     private double stockPart;
     private double stockFloor;
+    private double cutDepth;
     private double machineTime;
+    private String description;
+    @OneToOne
     private Tool tool;
 
     public void setOperationName(String operationName) {
-        this.operationName = operationName.replace("_"," ").trim();
+        this.operationName = operationName.replace("_", " ").trim();
     }
 }

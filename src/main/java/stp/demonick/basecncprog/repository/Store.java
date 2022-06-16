@@ -8,8 +8,8 @@ public interface Store<T> {
 
     void save(T domain);
 
-    T findById(int id);
+    T findById(long id);
 
-    void delete(int id);
+    void delete(long id);
 
 }

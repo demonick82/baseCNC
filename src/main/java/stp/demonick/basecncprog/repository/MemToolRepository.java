@@ -16,12 +16,12 @@ public class MemToolRepository implements Store<Tool> {
     }
 
     @Override
-    public Tool findById(int id) {
+    public Tool findById(long id) {
         return null;
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
 
     }
 }

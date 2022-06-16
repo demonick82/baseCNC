@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class MemDetailRepository implements Store<Detail> {
-    private final Map<Integer, Detail> details = new TreeMap<>();
+    private final Map<Long, Detail> details = new TreeMap<>();
 
     private static final AtomicInteger detailsId = new AtomicInteger(0);
 
@@ -34,7 +34,7 @@ public class MemDetailRepository implements Store<Detail> {
 
 
     @Override
-    public Detail findById(int id) {
+    public Detail findById(long id) {
         return details.get(id);
     }
 
@@ -48,7 +48,7 @@ public class MemDetailRepository implements Store<Detail> {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         details.remove(id);
     }
 

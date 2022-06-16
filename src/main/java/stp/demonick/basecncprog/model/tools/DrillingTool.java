@@ -1,7 +1,8 @@
 package stp.demonick.basecncprog.model.tools;
 
+import javax.persistence.Entity;
 import java.util.StringJoiner;
-
+@Entity
 public class DrillingTool extends Tool {
     private double toolPointAngle;
 

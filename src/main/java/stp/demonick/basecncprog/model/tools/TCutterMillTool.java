@@ -2,7 +2,7 @@ package stp.demonick.basecncprog.model.tools;
 
 import java.util.StringJoiner;
 
-public class TCutterMill extends Tool {
+public class TCutterMillTool extends Tool {
     private double shankDiameter;
     private double lowerCornerRadius;
     private double upperCornerRadius;
@@ -33,7 +33,7 @@ public class TCutterMill extends Tool {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", TCutterMill.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", TCutterMillTool.class.getSimpleName() + "[", "]")
                 .add("id=" + getId())
                 .add("toolNumber=" + getToolNumber())
                 .add("toolName='" + getToolName() + "'")

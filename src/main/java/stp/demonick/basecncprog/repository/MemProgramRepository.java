@@ -35,7 +35,7 @@ public class MemProgramRepository implements Store<Program> {
     }
 
     @Override
-    public Program findById(int id) {
+    public Program findById(long id) {
         for (Detail detail : repository.findAll()) {
             for (Program program : detail.getPrograms()) {
                 if (program.getId() == id) {
@@ -47,7 +47,7 @@ public class MemProgramRepository implements Store<Program> {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
 
     }
 
