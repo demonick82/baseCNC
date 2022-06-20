@@ -1,7 +1,11 @@
 package stp.demonick.basecncprog.model.tools;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.StringJoiner;
 
+@Entity
+@Table(name = "champher_mill_tools")
 public class ChampherMill extends Tool {
     private double toolTapperAngle;
     private double chamferLength;

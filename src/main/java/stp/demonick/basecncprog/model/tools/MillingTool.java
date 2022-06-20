@@ -1,7 +1,11 @@
 package stp.demonick.basecncprog.model.tools;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.StringJoiner;
 
+@Entity
+@Table(name = "milling_tools")
 public class MillingTool extends Tool {
     private double cornerRadius;
 

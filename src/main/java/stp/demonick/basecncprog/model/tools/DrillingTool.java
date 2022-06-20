@@ -1,8 +1,10 @@
 package stp.demonick.basecncprog.model.tools;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.StringJoiner;
 @Entity
+@Table(name = "drilling_tools")
 public class DrillingTool extends Tool {
     private double toolPointAngle;
 

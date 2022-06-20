@@ -1,7 +1,11 @@
 package stp.demonick.basecncprog.model.tools;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.StringJoiner;
 
+@Entity
+@Table(name = "thread_mill_tools")
 public class ThreadMillTool extends Tool {
     private double toolPitch;
 

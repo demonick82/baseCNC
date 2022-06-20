@@ -1,7 +1,11 @@
 package stp.demonick.basecncprog.model.tools;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.StringJoiner;
 
+@Entity
+@Table(name = "tap_tools")
 public class TapTool extends Tool {
     private double toolPitch;
 
