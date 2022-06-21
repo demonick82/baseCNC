@@ -15,7 +15,6 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String programNumber;
-    private String path;
     private String operationName;
     private String operationType;
     private double spindleSpeed;
@@ -25,7 +24,8 @@ public class Operation {
     private double cutDepth;
     private double machineTime;
     private String description;
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "tools_id")
     private Tool tool;
 
     public void setOperationName(String operationName) {

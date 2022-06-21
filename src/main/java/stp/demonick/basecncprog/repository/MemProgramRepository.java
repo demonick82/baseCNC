@@ -8,7 +8,7 @@ import stp.demonick.basecncprog.model.Program;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+//@Repository
 public class MemProgramRepository implements Store<Program> {
 
     private final MemDetailRepository repository;

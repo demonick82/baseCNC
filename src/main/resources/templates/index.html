@@ -45,6 +45,8 @@
             <td><a th:text="${detail.drawingNumber}"></a></td>
             <td><a th:text="${detail.name}"></a></td>
             <td><a class="nav-link active" th:href="@{/programs/(id=${detail.id})}">Подробнее</a></td>
+            <td><a class="btn btn-outline-dark" th:href="@{/deleteDetail/(id=${detail.id})}">Удалить деталь</a></td>
+
         </tr>
         </tbody>
     </table>

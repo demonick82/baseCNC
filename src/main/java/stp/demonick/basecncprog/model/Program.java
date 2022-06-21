@@ -23,20 +23,24 @@ public class Program {
     private String modelPath;
     private LocalDate created;
     private LocalDate updated;
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "machines_id")
     private Machine machine;
 
     @EqualsAndHashCode.Exclude
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "operation_blanks_id")
     private OperationBlank operationBlank;
-    @OneToOne
+
     @EqualsAndHashCode.Exclude
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "programmers_id")
     private Programmer programmer;
 
 
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "programs_id")
+    @JoinColumn(name = "operations_id")
     private List<Operation> operations = new ArrayList<>();
 
 

@@ -14,6 +14,6 @@ public class Programmer {
     private String name;
     private String login;
     private String password;
-    @ManyToOne
-    private Authority authority;
+ /*   @ManyToOne
+    private Authority authority;*/
 }

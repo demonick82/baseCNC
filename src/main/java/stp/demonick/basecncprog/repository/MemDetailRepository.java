@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+//@Repository
 public class MemDetailRepository implements Store<Detail> {
     private final Map<Long, Detail> details = new TreeMap<>();
 
