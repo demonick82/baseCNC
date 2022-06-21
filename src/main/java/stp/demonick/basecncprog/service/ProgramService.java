@@ -74,4 +74,8 @@ public class ProgramService {
             e.printStackTrace();
         }
     }
+
+    public void deleteProgram(long id) {
+        programRepository.deleteById(id);
+    }
 }

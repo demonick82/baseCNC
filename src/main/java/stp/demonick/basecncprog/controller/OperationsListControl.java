@@ -29,4 +29,5 @@ public class OperationsListControl {
         model.addAttribute("date", LocalDate.now());
         return "operations_list";
     }
+
 }

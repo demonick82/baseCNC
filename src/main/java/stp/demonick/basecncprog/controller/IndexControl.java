@@ -22,10 +22,8 @@ public class IndexControl {
     }
 
     @GetMapping("/deleteDetail")
-    public String deleteDetail(@RequestParam("id") long id, Model model) {
+    public String deleteDetail(@RequestParam("id") long id) {
         modelService.deleteDetail(id);
         return "index";
     }
-
-
 }
