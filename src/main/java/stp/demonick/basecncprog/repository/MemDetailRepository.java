@@ -24,7 +24,9 @@ public class MemDetailRepository implements Store<Detail> {
         Detail detail3 = Detail.of("941-5310-049-01", "Коллектор концевая часть");
         detail3.setId(detailsId.incrementAndGet());
         details.put(detail3.getId(), detail3);
-
+        Detail detail4 = Detail.of("23550.734.343.001", "Корпус");
+        detail4.setId(detailsId.incrementAndGet());
+        details.put(detail4.getId(), detail4);
     }
 
     @Override
