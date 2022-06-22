@@ -13,16 +13,17 @@ CREATE TABLE IF NOT EXISTS details
 
 CREATE TABLE IF NOT EXISTS programs
 (
-    id             bigserial primary key,
-    program_name   varchar,
-    program_path   varchar,
-    ug_version     varchar,
-    model_path     varchar,
-    created        date,
-    updated        date,
-    details_id     bigint references programs (id),
-    programmers_id bigint references programs (id),
-    machines_id    bigint references programs (id)
+    id                  bigserial primary key,
+    program_name        varchar,
+    program_path        varchar,
+    ug_version          varchar,
+    model_path          varchar,
+    created             date,
+    updated             date,
+    details_id          bigint references programs (id),
+    programmers_id      bigint references programs (id),
+    machines_id         bigint references programs (id),
+    operation_blanks_id bigint references programs (id)
 );
 
 CREATE TABLE IF NOT EXISTS machines
@@ -33,8 +34,10 @@ CREATE TABLE IF NOT EXISTS machines
 
 CREATE TABLE IF NOT EXISTS programmers
 (
-    id   bigserial primary key,
-    name varchar
+    id       bigserial primary key,
+    name     varchar,
+    login    varchar,
+    password varchar
 );
 
 CREATE TABLE IF NOT EXISTS operation_blanks
@@ -75,27 +78,27 @@ CREATE TABLE IF NOT EXISTS bore_tools
 
 CREATE TABLE IF NOT EXISTS champher_mill_tools
 (
-    id              bigserial primary key,
-    toolNumber      int,
-    toolName        varchar,
-    toolDiametr     float8,
-    length          float8,
-    fluteLength     float8,
-    fluteNumber     int,
-    toolTapperAngle float8,
-    chamferLength   float8
+    id                bigserial primary key,
+    tool_number       int,
+    tool_name         varchar,
+    tool_diametr      float8,
+    length            float8,
+    flute_length      float8,
+    flute_number      int,
+    tool_tapper_angle float8,
+    chamfer_length    float8
 );
 
 CREATE TABLE IF NOT EXISTS drilling_tools
 (
-    id             bigserial primary key,
-    toolNumber     int,
-    toolName       varchar,
-    toolDiametr    float8,
-    length         float8,
-    fluteLength    float8,
-    fluteNumber    int,
-    toolPointAngle float8
+    id               bigserial primary key,
+    tool_number      int,
+    tool_name        varchar,
+    tool_diametr     float8,
+    length           float8,
+    flute_length     float8,
+    flute_number     int,
+    tool_point_angle float8
 );
 
 CREATE TABLE IF NOT EXISTS milling_tools

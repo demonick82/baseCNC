@@ -1,0 +1,1 @@
+INSERT INTO programmers (login, name, password) VALUES ('polyanskiy','Полянский Д.Д.','123');
