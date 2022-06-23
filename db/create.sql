@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS programs
 CREATE TABLE IF NOT EXISTS machines
 (
     id           bigserial primary key,
+    name_for_nx varchar,
     machine_name varchar
 );
 

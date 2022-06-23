@@ -20,12 +20,16 @@ public class ProgramService {
     private final ProgramRepository programRepository;
     private final TextFormat format;
     private final CopyFiles copyFiles;
+    private final ProgrammerService programmerService;
+    private final MachineService machineService;
 
-    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository, TextFormat format, CopyFiles copyFiles) {
+    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository, TextFormat format, CopyFiles copyFiles, ProgrammerService programmerService, MachineService machineService) {
         this.detailRepository = detailRepository;
         this.programRepository = programRepository;
         this.format = format;
         this.copyFiles = copyFiles;
+        this.programmerService = programmerService;
+        this.machineService = machineService;
     }
 
 
@@ -50,12 +54,12 @@ public class ProgramService {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "Cp1251"));
             reader.lines().forEach(builder::append);
             Program program = mapper.readValue(format.updateJson(builder), Program.class);
-
+            program.setProgrammer(programmerService.findByLogin("polyanskiy"));
+            program.setMachine(machineService.findMachineByNXName(program.getMachine().getNameForNX()));
             Detail detail = detailRepository.findById(id).orElseThrow(
                     () -> new NotFoundException("detail not found"));
             detail.addProgram(program);
             detailRepository.save(detail);
-            System.out.println("detail= " + detail);
             String newPrtDir = copyFiles.copyPrtFiles(program.getModelPath(), detail.getDrawingNumber(),
                     program.getProgramName(), program.getMachine().getMachineName());
             String newCNCDir = copyFiles.copyCNCFiles(program.getModelPath(), program.getProgramPath(), detail.getDrawingNumber(),

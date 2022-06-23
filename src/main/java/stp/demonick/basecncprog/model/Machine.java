@@ -11,5 +11,6 @@ public class Machine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String nameForNX;
     private String machineName;
 }

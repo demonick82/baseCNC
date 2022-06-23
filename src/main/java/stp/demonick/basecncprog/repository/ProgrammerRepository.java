@@ -6,4 +6,5 @@ import stp.demonick.basecncprog.model.Programmer;
 
 @Repository
 public interface ProgrammerRepository extends CrudRepository<Programmer, Long> {
+    Programmer findByLogin(String login);
 }

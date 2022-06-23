@@ -6,4 +6,5 @@ import stp.demonick.basecncprog.model.Machine;
 
 @Repository
 public interface MachineRepository extends CrudRepository<Machine, Long> {
+    Machine findByNameForNX(String name);
 }
