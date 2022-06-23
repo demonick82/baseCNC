@@ -20,16 +20,15 @@ CREATE TABLE IF NOT EXISTS programs
     model_path          varchar,
     created             date,
     updated             date,
-    details_id          bigint references programs (id),
-    programmers_id      bigint references programs (id),
-    machines_id         bigint references programs (id),
-    operation_blanks_id bigint references programs (id)
+    details_id          bigint references details (id),
+    programmers_id      bigint references programmers (id),
+    machines_id         bigint references machines (id),
+    operation_blanks_id bigint references operation_blanks (id)
 );
 
 CREATE TABLE IF NOT EXISTS machines
 (
     id           bigserial primary key,
-    name_for_nx varchar,
     machine_name varchar
 );
 
@@ -62,7 +61,9 @@ CREATE TABLE IF NOT EXISTS operations
     cut_depth      float8,
     machine_time   float8,
     description    varchar,
-    tools_id       bigint references operations (id)
+    tools_id       bigint,
+    operations_id bigint references programs(id)
+
 );
 
 CREATE TABLE IF NOT EXISTS bore_tools

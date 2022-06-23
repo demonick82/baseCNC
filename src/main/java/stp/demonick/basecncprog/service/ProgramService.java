@@ -12,6 +12,7 @@ import stp.demonick.basecncprog.utils.CopyFiles;
 import stp.demonick.basecncprog.utils.TextFormat;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Service
@@ -55,7 +56,8 @@ public class ProgramService {
             reader.lines().forEach(builder::append);
             Program program = mapper.readValue(format.updateJson(builder), Program.class);
             program.setProgrammer(programmerService.findByLogin("polyanskiy"));
-            program.setMachine(machineService.findMachineByNXName(program.getMachine().getNameForNX()));
+            program.setMachine(machineService.findMachineByName(program.getMachine().getMachineName()));
+            program.setCreated(LocalDate.now());
             Detail detail = detailRepository.findById(id).orElseThrow(
                     () -> new NotFoundException("detail not found"));
             detail.addProgram(program);

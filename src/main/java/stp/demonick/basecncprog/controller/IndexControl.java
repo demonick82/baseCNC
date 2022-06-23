@@ -24,6 +24,6 @@ public class IndexControl {
     @GetMapping("/deleteDetail")
     public String deleteDetail(@RequestParam("id") long id) {
         modelService.deleteDetail(id);
-        return "index";
+        return "redirect:/";
     }
 }

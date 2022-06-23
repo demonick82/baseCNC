@@ -21,9 +21,10 @@ public class Program {
     private String programPath;
     private String ugVersion;
     private String modelPath;
+
     private LocalDate created;
     private LocalDate updated;
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "machines_id")
     private Machine machine;
 
@@ -33,7 +34,7 @@ public class Program {
     private OperationBlank operationBlank;
 
     @EqualsAndHashCode.Exclude
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "programmers_id")
     private Programmer programmer;
 

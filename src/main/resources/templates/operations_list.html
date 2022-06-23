@@ -5,9 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-                  rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-                  crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+          crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/operation.css}"/>
     <title>Список операций</title>
 </head>
@@ -28,9 +28,9 @@
             </tr>
             </thead>
             <tr>
-                <td>Полянский</td>
+                <td th:text="${program.programmer.name}"></td>
                 <td></td>
-                <td th:text="${date}"></td>
+                <td th:text="${program.created}"></td>
                 <td th:text="${detail.drawingNumber}"></td>
                 <td th:text="${detail.name}"></td>
                 <td th:text="${program.programName}"></td>
@@ -42,9 +42,9 @@
             <tr>
                 <th width="2%">№</th>
                 <th width="10%">Наименование операции</th>
-<!--
-                <th width="7%">Тип операции</th>
--->
+                <!--
+                                <th width="7%">Тип операции</th>
+                -->
                 <th width="5%">Файл УП</th>
                 <th width="5%">Припуск</th>
                 <th width="6%">Припуск на дно</th>
@@ -59,12 +59,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="operation : ${operations}">
-                <td><a th:text="${operation.id}"></a></td>
+            <tr th:each="operation : ${operations}" , th:with="counter=${increment.incrementAndGet}">
+                <td><a th:text="${counter}"></a></td>
                 <td><a th:text="${operation.operationName}"></a></td>
-<!--
-                <td><a th:text="${operation.operationType}"></a></td>
--->
+                <!--
+                                <td><a th:text="${operation.operationType}"></a></td>
+                -->
                 <td><a th:text="${operation.programNumber}"></a></td>
                 <td><a th:text="${operation.stockPart}"></a></td>
                 <td><a th:text="${operation.stockFloor}"></a></td>

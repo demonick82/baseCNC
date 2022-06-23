@@ -12,7 +12,7 @@ public class MachineService {
         this.machineRepository = machineRepository;
     }
 
-    Machine findMachineByNXName(String name) {
-        return machineRepository.findByNameForNX(name);
+    Machine findMachineByName(String name) {
+        return machineRepository.findByMachineName(name);
     }
 }

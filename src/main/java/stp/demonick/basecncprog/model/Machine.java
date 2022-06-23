@@ -11,6 +11,9 @@ public class Machine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nameForNX;
     private String machineName;
+
+    public void setMachineName(String machineName) {
+        this.machineName = machineName.replace("_"," ");
+    }
 }

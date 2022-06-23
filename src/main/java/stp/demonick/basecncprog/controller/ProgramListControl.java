@@ -47,6 +47,7 @@ public class ProgramListControl {
     @GetMapping("/deleteProgram")
     public String deleteProgram(@RequestParam("id") long id, Model model) {
         programService.deleteProgram(id);
-        return "index";
+        Detail detail =(Detail) model.getAttribute("detail");
+        return "redirect:/programs/?id="+detail.getId();
     }
 }
