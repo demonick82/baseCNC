@@ -3,6 +3,7 @@ package stp.demonick.basecncprog.test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.Comparator;
 
 public class TestCopyFiles {
 
@@ -41,8 +42,16 @@ public class TestCopyFiles {
         return fullName.substring(0, fullName.lastIndexOf("."));
     }
 
+    public void deleteDirectory(String directory) throws IOException {
+        Path path = Path.of(directory);
+        Files.walk(path)
+                .sorted(Comparator.reverseOrder())
+                .map(Path::toFile)
+                .forEach(File::delete);
+    }
+
     public static void main(String[] args) throws IOException {
-        String s = "D:\\work\\stpProgs\\M6-AP2TM_04.02.01\\New\\OP80\\Part_Man\\M6-AP2TM_04.02.01_DOZATOR_Man_OP80_FREZAD80_SPINNERU620.prt";
+/*        String s = "D:\\work\\stpProgs\\M6-AP2TM_04.02.01\\New\\OP80\\Part_Man\\M6-AP2TM_04.02.01_DOZATOR_Man_OP80_FREZAD80_SPINNERU620.prt";
         String s1 = "D:\\work\\stpProgs\\M6-AP2TM_04.02.01\\New\\OP80\\CNC\\3_UST\\";
         String name = "M6-AP2TM_04.02.01";
         String operationName = "OP 30";
@@ -50,7 +59,6 @@ public class TestCopyFiles {
         String endFolderPrt = "Part_Man";
         String endFolderCnc = "CNC";
         TestCopyFiles copyFiles = new TestCopyFiles();
-        copyFiles.copyAllFiles(s, s1, name, operationName, machineName);
-
+        copyFiles.copyAllFiles(s, s1, name, operationName, machineName);*/
     }
 }

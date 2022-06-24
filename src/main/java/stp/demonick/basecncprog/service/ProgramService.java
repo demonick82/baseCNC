@@ -12,8 +12,12 @@ import stp.demonick.basecncprog.utils.CopyFiles;
 import stp.demonick.basecncprog.utils.TextFormat;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Comparator;
 
 @Service
 public class ProgramService {
@@ -33,10 +37,6 @@ public class ProgramService {
         this.machineService = machineService;
     }
 
-
-    public Collection<Program> findAllProgram() {
-        return programRepository.findAll();
-    }
 
     public Collection<Program> findAllProgramForDetailId(long id) {
         return detailRepository.findById(id).orElseThrow(
@@ -61,13 +61,13 @@ public class ProgramService {
             Detail detail = detailRepository.findById(id).orElseThrow(
                     () -> new NotFoundException("detail not found"));
             detail.addProgram(program);
-            detailRepository.save(detail);
             String newPrtDir = copyFiles.copyPrtFiles(program.getModelPath(), detail.getDrawingNumber(),
                     program.getProgramName(), program.getMachine().getMachineName());
             String newCNCDir = copyFiles.copyCNCFiles(program.getModelPath(), program.getProgramPath(), detail.getDrawingNumber(),
                     program.getProgramName(), program.getMachine().getMachineName());
             program.setModelPath(newPrtDir);
             program.setProgramPath(newCNCDir);
+            detailRepository.save(detail);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,7 +81,25 @@ public class ProgramService {
         }
     }
 
+    private void deleteDirectory(Path path) {
+        try {
+            Files.walk(path)
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void deleteProgram(long id) {
-        programRepository.deleteById(id);
+        Program program = programRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("program not found"));
+                Path fullPath = Paths.get(program.getModelPath());
+        if (Files.exists(fullPath)) {
+            Path newPath = Paths.get("D:\\work\\BaseCNC", fullPath.getName(2).toString());
+            deleteDirectory(newPath);
+        }
+        programRepository.delete(program);
     }
 }
