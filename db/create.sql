@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS authorities
 CREATE TABLE IF NOT EXISTS details
 (
     id             bigserial primary key,
-    drawing_number varchar,
+    drawing_number varchar unique,
     name           varchar
 );
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS operations
     machine_time   float8,
     description    varchar,
     tools_id       bigint,
-    operations_id bigint references programs(id)
+    operations_id  bigint references programs (id)
 
 );
 
