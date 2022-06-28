@@ -37,19 +37,27 @@
         <tr>
             <th scope="col">№ Чертежа</th>
             <th scope="col">Наименование</th>
-            <th scope="col">Подробнеее</th>
+            <th scope="col">Операции</th>
+            <th scope="col">Редактировать</th>
+            <th scope="col">Удалить</th>
+
         </tr>
         </thead>
         <tbody>
         <tr th:each="detail : ${details}">
             <td><a th:text="${detail.drawingNumber}"></a></td>
             <td><a th:text="${detail.name}"></a></td>
-            <td><a class="nav-link active" th:href="@{/programs/(id=${detail.id})}">Подробнее</a></td>
+            <td><a class="nav-link active" th:href="@{/programs/(id=${detail.id})}">Операции</a></td>
+            <td><a class="btn btn-outline-dark" th:href="@{/editDetail/(id=${detail.id})}">Редактировать</a></td>
+
             <td><a class="btn btn-outline-dark" th:href="@{/deleteDetail/(id=${detail.id})}">Удалить деталь</a></td>
 
         </tr>
         </tbody>
     </table>
+    <div th:if="${errorMessage!=null}" th:text="${errorMessage}"
+         style="color:red; font-weight: bold; margin: 30px 0px;">
+    </div>
 </div>
 
 
