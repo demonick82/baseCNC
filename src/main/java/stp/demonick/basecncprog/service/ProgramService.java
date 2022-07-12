@@ -25,15 +25,15 @@ public class ProgramService {
     private final ProgramRepository programRepository;
     private final TextFormat format;
     private final CopyFiles copyFiles;
-    private final ProgrammerService programmerService;
+    private final UsersService usersService;
     private final MachineService machineService;
 
-    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository, TextFormat format, CopyFiles copyFiles, ProgrammerService programmerService, MachineService machineService) {
+    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository, TextFormat format, CopyFiles copyFiles, UsersService usersService, MachineService machineService) {
         this.detailRepository = detailRepository;
         this.programRepository = programRepository;
         this.format = format;
         this.copyFiles = copyFiles;
-        this.programmerService = programmerService;
+        this.usersService = usersService;
         this.machineService = machineService;
     }
 
@@ -48,14 +48,14 @@ public class ProgramService {
                 () -> new NotFoundException("program not found"));
     }
 
-    public void addProgram(MultipartFile file, long id) {
+    public void addProgram(MultipartFile file, long id, String login) {
         StringBuilder builder = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
         try (InputStream inputStream = file.getInputStream()) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "Cp1251"));
             reader.lines().forEach(builder::append);
             Program program = mapper.readValue(format.updateJson(builder), Program.class);
-            program.setProgrammer(programmerService.findByLogin("polyanskiy"));
+            program.setUser(usersService.findByLogin(login));
             program.setMachine(machineService.findMachineByName(program.getMachine().getMachineName()));
             program.setCreated(LocalDate.now());
             Detail detail = detailRepository.findById(id).orElseThrow(

@@ -3,12 +3,25 @@ CREATE TABLE IF NOT EXISTS authorities
     id        serial primary key,
     authority varchar not null unique
 );
+CREATE TABLE IF NOT EXISTS drawings
+(
+    id   bigserial primary key,
+    path varchar
+);
+CREATE TABLE IF NOT EXISTS technological_processes
+(
+    id         bigserial primary key,
+    path       varchar,
+    details_id bigint references details (id)
+);
 
 CREATE TABLE IF NOT EXISTS details
 (
     id             bigserial primary key,
     drawing_number varchar unique,
-    name           varchar
+    name           varchar,
+    drawings_id    bigint references drawings (id)
+
 );
 
 CREATE TABLE IF NOT EXISTS programs
@@ -21,7 +34,7 @@ CREATE TABLE IF NOT EXISTS programs
     created             date,
     updated             date,
     details_id          bigint references details (id),
-    programmers_id      bigint references programmers (id),
+    programmers_id      bigint references users (id),
     machines_id         bigint references machines (id),
     operation_blanks_id bigint references operation_blanks (id)
 );
@@ -32,12 +45,15 @@ CREATE TABLE IF NOT EXISTS machines
     machine_name varchar
 );
 
-CREATE TABLE IF NOT EXISTS programmers
+CREATE TABLE IF NOT EXISTS users
 (
-    id       bigserial primary key,
-    name     varchar,
-    login    varchar,
-    password varchar
+    id           bigserial primary key,
+    name         varchar,
+    login        varchar,
+    password     varchar,
+    enabled      boolean default true,
+    authority_id int not null references authorities (id)
+
 );
 
 CREATE TABLE IF NOT EXISTS operation_blanks

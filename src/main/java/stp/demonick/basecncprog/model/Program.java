@@ -36,7 +36,7 @@ public class Program {
     @EqualsAndHashCode.Exclude
     @OneToOne
     @JoinColumn(name = "programmers_id")
-    private Programmer programmer;
+    private User user;
 
 
     @EqualsAndHashCode.Exclude

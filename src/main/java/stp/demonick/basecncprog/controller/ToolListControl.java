@@ -11,11 +11,11 @@ import stp.demonick.basecncprog.service.ToolsService;
 
 @Controller
 @SessionAttributes(value = "detail")
-public class ToolListController {
+public class ToolListControl {
 
     private final ToolsService toolsService;
 
-    public ToolListController(ToolsService toolsService) {
+    public ToolListControl(ToolsService toolsService) {
         this.toolsService = toolsService;
     }
 

@@ -28,6 +28,15 @@ public class Detail {
     }
 
     @EqualsAndHashCode.Exclude
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "drawings_id")
+    private Drawing drawing;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "details_id")
+    private List<TechnologicalProcess> technologicalProcesses = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "details_id")
     private List<Program> programs = new ArrayList<>();

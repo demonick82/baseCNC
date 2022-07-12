@@ -46,15 +46,15 @@
         <tbody>
         <tr th:each="program : ${programs}">
             <td><a th:text="${program.programName}"></a></td>
-            <td><a th:text="${program.programmer.name}"></a></td>
+            <td><a th:text="${program.user.name}"></a></td>
             <td><a th:text="${program.machine.machineName}"></a></td>
             <td><a th:text="${program.ugVersion}"></a></td>
-            <td ><a class="nav-link active" th:href="@{/viewPrt/(id=${program.id})}">Открыть</a></td>
-            <td ><a class="nav-link active" th:href="@{/viewCNC/(id=${program.id})}">Открыть</a></td>
+            <td><a class="nav-link active" th:href="@{/viewPrt/(id=${program.id})}">Открыть</a></td>
+            <td><a class="nav-link active" th:href="@{/viewCNC/(id=${program.id})}">Открыть</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/operations/(id=${program.id})}">Список операций</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/tools/(id=${program.id})}">Список инструмента</a></td>
-            <td><a class="btn btn-outline-dark" th:href="@{/deleteProgram/(id=${program.id})}">Удалить программу</a></td>
-
+            <td><a class="btn btn-outline-dark" th:href="@{/deleteProgram/(id=${program.id})}">Удалить программу</a>
+            </td>
         </tr>
         </tbody>
     </table>
