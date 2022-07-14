@@ -31,10 +31,10 @@ public class OperationsListControl {
         var operations = operationService.findOperationsForProgramId(id);
         double machineTime = operations.stream()
                 .mapToDouble(Operation::getMachineTime).sum();
-        System.out.println("machine time= " + machineTime);
         model.addAttribute("program", programService.findProgramById(id));
         model.addAttribute("operations", operations);
         model.addAttribute("increment", new AtomicInteger(0));
+        model.addAttribute("machineTime", machineTime);
         return "operations_list";
     }
 }
