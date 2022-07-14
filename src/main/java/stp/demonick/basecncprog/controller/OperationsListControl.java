@@ -28,7 +28,7 @@ public class OperationsListControl {
 
     @GetMapping({"/operations"})
     public String viewOperations(@RequestParam("id") int id, Model model) {
-        var operations = operationService.findOperationsForProgramId(id);
+        List<Operation> operations = operationService.findOperationsForProgramId(id);
         double machineTime = operations.stream()
                 .mapToDouble(Operation::getMachineTime).sum();
         model.addAttribute("program", programService.findProgramById(id));
