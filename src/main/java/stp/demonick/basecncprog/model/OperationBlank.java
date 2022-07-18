@@ -12,7 +12,15 @@ public class OperationBlank {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;
     private String path;
     private String comment;
+
+    public OperationBlank(String path, String comment) {
+        this.path = path;
+        this.comment = comment;
+    }
+
+    public OperationBlank() {
+
+    }
 }

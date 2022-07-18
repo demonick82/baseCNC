@@ -10,6 +10,7 @@ import stp.demonick.basecncprog.repository.DetailRepository;
 import stp.demonick.basecncprog.repository.ProgramRepository;
 import stp.demonick.basecncprog.utils.CopyFiles;
 import stp.demonick.basecncprog.utils.TextFormat;
+import stp.demonick.basecncprog.utils.Translit;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -27,16 +28,18 @@ public class ProgramService {
     private final CopyFiles copyFiles;
     private final UsersService usersService;
     private final MachineService machineService;
+    private final Translit translit;
 
-    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository, TextFormat format, CopyFiles copyFiles, UsersService usersService, MachineService machineService) {
+
+    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository, TextFormat format, CopyFiles copyFiles, UsersService usersService, MachineService machineService, Translit translit) {
         this.detailRepository = detailRepository;
         this.programRepository = programRepository;
         this.format = format;
         this.copyFiles = copyFiles;
         this.usersService = usersService;
         this.machineService = machineService;
+        this.translit = translit;
     }
-
 
     public Collection<Program> findAllProgramForDetailId(long id) {
         return detailRepository.findById(id).orElseThrow(
@@ -61,10 +64,10 @@ public class ProgramService {
             Detail detail = detailRepository.findById(id).orElseThrow(
                     () -> new NotFoundException("detail not found"));
             detail.addProgram(program);
-            String newPrtDir = copyFiles.copyPrtFiles(program.getModelPath(), detail.getDrawingNumber(),
+            String newPrtDir = copyFiles.copyPrtFiles(program.getModelPath(), login, translit.setLatin(detail.getDrawingNumber()),
                     program.getProgramName(), program.getMachine().getMachineName());
-            String newCNCDir = copyFiles.copyCNCFiles(program.getModelPath(), program.getProgramPath(), detail.getDrawingNumber(),
-                    program.getProgramName(), program.getMachine().getMachineName());
+            String newCNCDir = copyFiles.copyCNCFiles(program.getModelPath(), login, program.getProgramPath(),
+                    translit.setLatin(detail.getDrawingNumber()), program.getProgramName(), program.getMachine().getMachineName());
             program.setModelPath(newPrtDir);
             program.setProgramPath(newCNCDir);
             detailRepository.save(detail);
@@ -95,9 +98,9 @@ public class ProgramService {
     public void deleteProgram(long id) {
         Program program = programRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("program not found"));
-                Path fullPath = Paths.get(program.getModelPath());
+        Path fullPath = Paths.get(program.getModelPath());
         if (Files.exists(fullPath)) {
-            Path newPath = Paths.get("D:\\work\\BaseCNC", fullPath.getName(2).toString());
+            Path newPath = Paths.get("D:\\work\\BaseCNC", fullPath.getName(2).toString(),fullPath.getName(3).toString());
             deleteDirectory(newPath);
         }
         programRepository.delete(program);
