@@ -11,14 +11,16 @@ import java.nio.file.StandardCopyOption;
 
 @Component
 public class CopyFiles {
-/*
-    MAY BE REFACTOR!!!!!!
-*/
-    private final String mainPath = "D:\\work\\BaseCNC";
+
+    private final StartPath startPath;
+
+    public CopyFiles(StartPath startPath) {
+        this.startPath = startPath;
+    }
 
     public String copyPrtFiles(String prtFileName, String username, String detailNumber, String operationName, String machineName) throws IOException {
         Path originalPrtPath = Paths.get(prtFileName);
-        Path newPrtDir = Paths.get(mainPath, detailNumber, username, operationName, machineName,
+        Path newPrtDir = Paths.get(startPath.loadStartPath(), detailNumber, username, operationName, machineName,
                 getPartName(originalPrtPath.getFileName()), "Part_Man");
         Files.createDirectories(newPrtDir);
         copyFiles(originalPrtPath.getParent(), newPrtDir);
@@ -28,13 +30,13 @@ public class CopyFiles {
     public String copyCNCFiles(String prtFileName, String username, String cncDir, String detailNumber, String operationName, String machineName) throws IOException {
         Path originalPrtPath = Paths.get(prtFileName);
         Path originalCNCDir = Paths.get(cncDir);
-        Path newCNCDir = Paths.get(mainPath, detailNumber, username, operationName, machineName,
+        Path newCNCDir = Paths.get(startPath.loadStartPath(), detailNumber, username, operationName, machineName,
                 getPartName(originalPrtPath.getFileName()), "CNC");
+        System.out.println(newCNCDir);
         Files.createDirectories(newCNCDir);
         copyFiles(originalCNCDir, newCNCDir);
         return newCNCDir.toString();
     }
-
 
     private void copyFiles(Path oldPath, Path newPath) {
         File[] files = new File(oldPath.toString()).listFiles();

@@ -9,6 +9,7 @@ import stp.demonick.basecncprog.model.Program;
 import stp.demonick.basecncprog.repository.DetailRepository;
 import stp.demonick.basecncprog.repository.ProgramRepository;
 import stp.demonick.basecncprog.utils.CopyFiles;
+import stp.demonick.basecncprog.utils.StartPath;
 import stp.demonick.basecncprog.utils.TextFormat;
 import stp.demonick.basecncprog.utils.Translit;
 
@@ -29,9 +30,10 @@ public class ProgramService {
     private final UsersService usersService;
     private final MachineService machineService;
     private final Translit translit;
+    private final StartPath startPath;
 
 
-    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository, TextFormat format, CopyFiles copyFiles, UsersService usersService, MachineService machineService, Translit translit) {
+    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository, TextFormat format, CopyFiles copyFiles, UsersService usersService, MachineService machineService, Translit translit, StartPath startPath) {
         this.detailRepository = detailRepository;
         this.programRepository = programRepository;
         this.format = format;
@@ -39,6 +41,7 @@ public class ProgramService {
         this.usersService = usersService;
         this.machineService = machineService;
         this.translit = translit;
+        this.startPath = startPath;
     }
 
     public Collection<Program> findAllProgramForDetailId(long id) {
@@ -100,9 +103,13 @@ public class ProgramService {
                 () -> new NotFoundException("program not found"));
         Path fullPath = Paths.get(program.getModelPath());
         if (Files.exists(fullPath)) {
-            Path newPath = Paths.get("D:\\work\\BaseCNC", fullPath.getName(2).toString(),fullPath.getName(3).toString());
+            Path newPath = Paths.get(startPath.loadStartPath(), fullPath.getName(2).toString(),fullPath.getName(3).toString());
             deleteDirectory(newPath);
         }
         programRepository.delete(program);
+    }
+
+    public void saveProgram(Program program) {
+        programRepository.save(program);
     }
 }

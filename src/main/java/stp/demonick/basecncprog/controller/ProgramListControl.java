@@ -1,14 +1,17 @@
 package stp.demonick.basecncprog.controller;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import stp.demonick.basecncprog.model.Detail;
 import stp.demonick.basecncprog.model.OperationBlank;
+import stp.demonick.basecncprog.model.Program;
 import stp.demonick.basecncprog.service.DetailService;
 import stp.demonick.basecncprog.service.OperationBlankService;
 import stp.demonick.basecncprog.service.ProgramService;
@@ -17,47 +20,64 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
-@SessionAttributes({"detail", "id"})
+@SessionAttributes({"detail", "program"})
 
 public class ProgramListControl {
     private final DetailService detailService;
     private final ProgramService programService;
     private final OperationBlankService operationBlankService;
 
-    public ProgramListControl(DetailService detailService, ProgramService programService, OperationBlankService operationBlankService) {
+    public ProgramListControl(DetailService detailService, ProgramService programService,
+                              OperationBlankService operationBlankService) {
         this.detailService = detailService;
         this.programService = programService;
         this.operationBlankService = operationBlankService;
     }
 
     @GetMapping({"/programs"})
-    public String viewOperations(@RequestParam("id") int id, Model model) {
+    public String viewOperations(@RequestParam("id") long id, Model model) {
         model.addAttribute("detail", detailService.findDetailById(id));
         model.addAttribute("programs", programService.findAllProgramForDetailId(id));
-        model.addAttribute("id", id);
         return "programs_list";
     }
 
     @GetMapping("/operation_blank_view")
-    public String viewOperationBlank(@RequestParam("id") int id, Model model) {
-        OperationBlank blank = programService.findProgramById(id).getOperationBlank();
+    public String viewOperationBlank(@RequestParam("id") long id, Model model) {
+        Program program = programService.findProgramById(id);
+        model.addAttribute("program", program);
+        OperationBlank blank = program.getOperationBlank();
         if (blank != null) {
-            model.addAttribute("blank", blank);
+            String[] comment = blank.getComment().split(System.lineSeparator());
+            model.addAttribute("comments", comment);
             return "operation_blank";
+        } else {
+            return "operation_blank_create";
         }
-        return "operation_blank_create";
     }
 
+    @GetMapping("/operationBlankPhoto/{programId}")
+    public ResponseEntity<Resource> downloadBlankPhoto(@PathVariable("programId") long id) {
+        byte[] img = operationBlankService.downLoadImage(programService.findProgramById(id));
+        return ResponseEntity.ok()
+                .headers(new HttpHeaders())
+                .contentLength(img.length)
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(new ByteArrayResource(img));
+    }
+
+
     @PostMapping("/addOperationBlank")
-    public String addOperationBlank(@RequestParam("file") MultipartFile file, Model model, HttpServletRequest req) {
-        operationBlankService.saveBlank(req.getParameter("name"),file);
+    public String addOperationBlank(@RequestParam("file") MultipartFile file,
+                                    Model model, HttpServletRequest req) {
+        Program program = (Program) model.getAttribute("program");
+        operationBlankService.saveBlank(req.getParameter("comment"), file, program);
         Detail detail = (Detail) model.getAttribute("detail");
         return "redirect:/programs/?id=" + detail.getId();
     }
 
 
     @GetMapping("/viewPrt")
-    public String viewPrtFiles(@RequestParam("id") int id, Model model) {
+    public String viewPrtFiles(@RequestParam("id") long id, Model model) {
         String prtFolder = programService.findProgramById(id).getModelPath();
         programService.openFile(prtFolder);
         Detail detail = (Detail) model.getAttribute("detail");
@@ -65,7 +85,7 @@ public class ProgramListControl {
     }
 
     @GetMapping("/viewCNC")
-    public String viewCNCFiles(@RequestParam("id") int id, Model model) {
+    public String viewCNCFiles(@RequestParam("id") long id, Model model) {
         String prtFolder = programService.findProgramById(id).getProgramPath();
         programService.openFile(prtFolder);
         Detail detail = (Detail) model.getAttribute("detail");

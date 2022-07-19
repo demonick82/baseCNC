@@ -6,10 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import stp.demonick.basecncprog.model.Detail;
 import stp.demonick.basecncprog.service.ProgramService;
 
 @Controller
-@SessionAttributes({"id"})
+@SessionAttributes({"detail"})
 public class AddProgramControl {
 
     private final ProgramService programService;
@@ -25,7 +26,8 @@ public class AddProgramControl {
 
     @PostMapping("/upload")
     public String getFile(@RequestParam("file") MultipartFile file, Model model) {
-        int id = (int) model.getAttribute("id");
+        Detail detail =(Detail) model.getAttribute("detail");
+        long id = detail.getId();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         programService.addProgram(file, id,auth.getName());
         return "redirect:/programs/?id="+id;
