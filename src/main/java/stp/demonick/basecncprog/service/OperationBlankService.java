@@ -20,7 +20,7 @@ public class OperationBlankService {
     }
 
     public void saveBlank(String comment, MultipartFile file, Program program) {
-        String path = program.getProgramPath() + "\\" + "blank.jpg";
+        String path = program.getProgramPath() + "\\" + file.getOriginalFilename();
         try (FileOutputStream fos = new FileOutputStream(path)) {
             fos.write(file.getBytes());
             program.setOperationBlank(new OperationBlank(path.replace("\\", "/"), comment));

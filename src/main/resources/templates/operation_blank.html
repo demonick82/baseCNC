@@ -13,39 +13,42 @@
 </head>
 <body>
 <div class="mainBlank">
-    <div>
-        <table class="tableHead">
-            <thead>
-            <tr>
-                <th width="10%">Разработал</th>
-                <th width="10%">Подпись</th>
-                <th width="10%">Дата</th>
-                <th>№ Детали</th>
-                <th>Наименование</th>
-                <th>Операция</th>
-                <th>Станок</th>
-            </tr>
-            </thead>
-            <tr>
-                <td th:text="${program.user.name}"></td>
-                <td></td>
-                <td th:text="${program.created}"></td>
-                <td th:text="${detail.drawingNumber}"></td>
-                <td th:text="${detail.name}"></td>
-                <td th:text="${program.programName}"></td>
-                <td th:text="${program.machine.machineName}"></td>
-            </tr>
-        </table>
-        <div class="row">
-            <div class="col-3">
+    <table class="tableHead">
+        <thead>
+        <tr>
+            <th width="10%">Разработал</th>
+            <th width="10%">Подпись</th>
+            <th width="10%">Дата</th>
+            <th>№ Детали</th>
+            <th>Наименование</th>
+            <th>Операция</th>
+            <th>Станок</th>
+        </tr>
+        </thead>
+        <tr>
+            <td th:text="${program.user.name}"></td>
+            <td></td>
+            <td th:text="${program.created}"></td>
+            <td th:text="${detail.drawingNumber}"></td>
+            <td th:text="${detail.name}"></td>
+            <td th:text="${program.programName}"></td>
+            <td th:text="${program.machine.machineName}"></td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-3">
+            <div class="p-5 fs-4">
                 <div th:each="comment : ${comments}">
                     <p th:text="${comment}"></p>
+
                 </div>
             </div>
-            <div class="col-9">
-                <img th:src="@{|/operationBlankPhoto/${program.id}|}">
-            </div>
         </div>
+        <div class="col-9">
+            <img th:src="@{|/operationBlankPhoto/${program.id}|}">
+        </div>
+    </div>
+    <div class="p-3 fs-3" th:text="${program.programPath}">
     </div>
 </div>
 

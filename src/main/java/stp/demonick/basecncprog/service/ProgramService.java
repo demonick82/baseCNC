@@ -33,7 +33,9 @@ public class ProgramService {
     private final StartPath startPath;
 
 
-    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository, TextFormat format, CopyFiles copyFiles, UsersService usersService, MachineService machineService, Translit translit, StartPath startPath) {
+    public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository,
+                          TextFormat format, CopyFiles copyFiles, UsersService usersService,
+                          MachineService machineService, Translit translit, StartPath startPath) {
         this.detailRepository = detailRepository;
         this.programRepository = programRepository;
         this.format = format;
@@ -74,9 +76,12 @@ public class ProgramService {
             program.setModelPath(newPrtDir);
             program.setProgramPath(newCNCDir);
             detailRepository.save(detail);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Выберете файл");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Неверный формат файла");
         }
+
     }
 
     public void openFile(String path) {
@@ -103,7 +108,7 @@ public class ProgramService {
                 () -> new NotFoundException("program not found"));
         Path fullPath = Paths.get(program.getModelPath());
         if (Files.exists(fullPath)) {
-            Path newPath = Paths.get(startPath.loadStartPath(), fullPath.getName(2).toString(),fullPath.getName(3).toString());
+            Path newPath = Paths.get(startPath.loadStartPath(), fullPath.getName(2).toString(), fullPath.getName(3).toString());
             deleteDirectory(newPath);
         }
         programRepository.delete(program);

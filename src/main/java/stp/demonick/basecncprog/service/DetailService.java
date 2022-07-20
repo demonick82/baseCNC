@@ -17,7 +17,7 @@ public class DetailService {
 
 
     public Collection<Detail> findAllDetails() {
-        return detailRepository.findAll();
+        return detailRepository.findByOrderByDrawingNumberAsc();
     }
 
     public void save(Detail detail) {
