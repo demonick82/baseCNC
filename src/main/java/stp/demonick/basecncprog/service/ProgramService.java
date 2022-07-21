@@ -84,13 +84,13 @@ public class ProgramService {
 
     }
 
-    public void openFile(String path) {
+/*    public void openFile(String path) {
         try {
             new ProcessBuilder("explorer.exe", path).start();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     private void deleteDirectory(Path path) {
         try {
@@ -108,7 +108,9 @@ public class ProgramService {
                 () -> new NotFoundException("program not found"));
         Path fullPath = Paths.get(program.getModelPath());
         if (Files.exists(fullPath)) {
-            Path newPath = Paths.get(startPath.loadStartPath(), fullPath.getName(2).toString(), fullPath.getName(3).toString());
+            Path newPath = Paths.get(startPath.loadStartPath(), fullPath.getName(4).toString(),
+                    fullPath.getName(5).toString(), fullPath.getName(6).toString(),
+                    fullPath.getName(7).toString(),fullPath.getName(8).toString());
             deleteDirectory(newPath);
         }
         programRepository.delete(program);

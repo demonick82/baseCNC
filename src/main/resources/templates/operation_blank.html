@@ -16,8 +16,8 @@
     <table class="tableHead">
         <thead>
         <tr>
-            <th width="10%">Разработал</th>
-            <th width="10%">Подпись</th>
+            <th width="14%">Разработал</th>
+            <th width="8%">Подпись</th>
             <th width="10%">Дата</th>
             <th>№ Детали</th>
             <th>Наименование</th>
@@ -37,18 +37,18 @@
     </table>
     <div class="row">
         <div class="col-3">
-            <div class="p-5 fs-4">
+            <div class="p-4 fs-5">
                 <div th:each="comment : ${comments}">
-                    <p th:text="${comment}"></p>
+                    <p class="mb-1" th:text="${comment}"></p>
 
                 </div>
             </div>
         </div>
-        <div class="col-9">
-            <img th:src="@{|/operationBlankPhoto/${program.id}|}">
+        <div class="col-9 p-2">
+            <img th:src="@{|/operationBlankPhoto/${program.id}|}" height="560">
         </div>
-    </div>
-    <div class="p-3 fs-3" th:text="${program.programPath}">
+        <div class="p-2 fs-5" th:text="${program.programPath}">
+        </div>
     </div>
 </div>
 

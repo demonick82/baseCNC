@@ -76,7 +76,7 @@ public class ProgramListControl {
     }
 
 
-    @GetMapping("/viewPrt")
+/*    @GetMapping("/viewPrt")
     public String viewPrtFiles(@RequestParam("id") long id, Model model) {
         String prtFolder = programService.findProgramById(id).getModelPath();
         programService.openFile(prtFolder);
@@ -90,7 +90,7 @@ public class ProgramListControl {
         programService.openFile(prtFolder);
         Detail detail = (Detail) model.getAttribute("detail");
         return "redirect:/programs/?id=" + detail.getId();
-    }
+    }*/
 
     @GetMapping("/deleteProgram")
     public String deleteProgram(@RequestParam("id") long id, Model model) {
