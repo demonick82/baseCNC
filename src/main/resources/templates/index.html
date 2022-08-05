@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -21,20 +21,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" th:href="@{/}">Главная</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item"  sec:authorize="hasAnyRole('ROLE_ADMIN')">
                     <a class="nav-link active" th:href="@{/}">Добавить пользователя</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN')">
                     <a class="nav-link active" th:href="@{/}">Добавить станок</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN')">
                     <a class="nav-link active" th:href="@{/newDetail}">Добавить деталь</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" th:href="@{/login}">Вход</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" th:href="@{/logout}">Выйти из системы </a>
+                <li class="nav-item" th:switch="${username}">
+                    <a class="nav-link active" th:case="'anonymousUser'" th:href="@{/login}">Войти</a>
+                    <a class="nav-link active" th:case="*" th:href="@{/logout}">Выйти</a>
                 </li>
             </ul>
         </div>
@@ -46,19 +44,26 @@
         <tr>
             <th scope="col">№ Чертежа</th>
             <th scope="col">Наименование</th>
+            <th scope="col">Чертеж</th>
+            <th scope="col">Техпроцесс</th>
             <th scope="col">Операции</th>
-            <th scope="col">Редактировать</th>
-            <th scope="col">Удалить</th>
+            <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN')">Редактировать</th>
+            <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN')">Удалить</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="detail : ${details}">
             <td><a th:text="${detail.drawingNumber}"></a></td>
             <td><a th:text="${detail.name}"></a></td>
-            <td><a class="nav-link active" th:href="@{/programs/(id=${detail.id})}">Подробнее</a></td>
-            <td><a class="btn btn-outline-dark" th:href="@{/editDetail/(id=${detail.id})}">Редактировать</a></td>
-            <td><a class="btn btn-outline-dark" th:href="@{/deleteDetail/(id=${detail.id})}">Удалить</a></td>
-
+            <td><a class="nav-link active" th:href="@{/}">Чертеж</a></td>
+            <td><a class="nav-link active" th:href="@{/}">Техпроцесс</a></td>
+            <td><a class="nav-link active" th:href="@{/programs/(id=${detail.id})}">Операции ЧПУ</a></td>
+            <td sec:authorize="hasAnyRole('ROLE_ADMIN')"><a class="btn btn-outline-dark"
+                                                            th:href="@{/editDetail/(id=${detail.id})}">Редактировать</a>
+            </td>
+            <td sec:authorize="hasAnyRole('ROLE_ADMIN')"><a class="btn btn-outline-dark"
+                                                            th:href="@{/deleteDetail/(id=${detail.id})}">Удалить</a>
+            </td>
         </tr>
         </tbody>
     </table>

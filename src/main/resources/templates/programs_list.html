@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -42,7 +42,7 @@
             <th scope="col">Карта наладки</th>
             <th scope="col">Список операций</th>
             <th scope="col">Список инструмента</th>
-            <th scope="col">Удалить</th>
+            <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN')">Удалить</th>
 
         </tr>
         </thead>
@@ -55,16 +55,18 @@
             <td><a th:text="${program.ugVersion}"></a></td>
             <td><a class="nav-link active" th:href="${program.modelPath}">Открыть</a></td>
             <td><a class="nav-link active" th:href="${program.programPath}">Открыть</a></td>
-            <td><a class="btn btn-outline-dark" th:href="@{/operation_blank_view/(id=${program.id})}">Карта наладки</a></td>
+            <td><a class="btn btn-outline-dark" th:href="@{/operation_blank_view/(id=${program.id})}">Карта наладки</a>
+            </td>
             <td><a class="btn btn-outline-dark" th:href="@{/operations/(id=${program.id})}">Список операций</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/tools/(id=${program.id})}">Список инструмента</a></td>
-            <td><a class="btn btn-outline-dark" th:href="@{/deleteProgram/(id=${program.id})}">Удалить программу</a>
+            <td sec:authorize="hasAnyRole('ROLE_ADMIN')"><a class="btn btn-outline-dark"
+                                                            th:href="@{/deleteProgram/(id=${program.id})}">Удалить
+                программу</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
