@@ -41,7 +41,16 @@ public class ProgramListControl {
         return "programs_list";
     }
 
-    @GetMapping("/operation_blank_view")
+/*    @PostMapping("/addOperationBlank")
+    public String addOperationBlank(@RequestParam("file") MultipartFile file,
+                                    Model model, HttpServletRequest req) {
+        Program program = (Program) model.getAttribute("program");
+        operationBlankService.saveBlank(req.getParameter("comment"), file, program);
+        Detail detail = (Detail) model.getAttribute("detail");
+        return "redirect:/programs/?id=" + detail.getId();
+    }*/
+
+/*    @GetMapping("/operation_blank_view")
     public String viewOperationBlank(@RequestParam("id") long id, Model model) {
         Program program = programService.findProgramById(id);
         model.addAttribute("program", program);
@@ -63,18 +72,7 @@ public class ProgramListControl {
                 .contentLength(img.length)
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .body(new ByteArrayResource(img));
-    }
-
-
-    @PostMapping("/addOperationBlank")
-    public String addOperationBlank(@RequestParam("file") MultipartFile file,
-                                    Model model, HttpServletRequest req) {
-        Program program = (Program) model.getAttribute("program");
-        operationBlankService.saveBlank(req.getParameter("comment"), file, program);
-        Detail detail = (Detail) model.getAttribute("detail");
-        return "redirect:/programs/?id=" + detail.getId();
-    }
-
+    }*/
 
 /*    @GetMapping("/viewPrt")
     public String viewPrtFiles(@RequestParam("id") long id, Model model) {

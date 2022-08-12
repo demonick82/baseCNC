@@ -53,7 +53,6 @@ CREATE TABLE IF NOT EXISTS users
     password     varchar,
     enabled      boolean default true,
     authority_id int not null references authorities (id)
-
 );
 
 CREATE TABLE IF NOT EXISTS operation_blanks

@@ -13,4 +13,11 @@ public class Drawing {
 
     private long id;
     private String path;
+
+    public Drawing(String path) {
+        this.path = path;
+    }
+
+    public Drawing() {
+    }
 }
