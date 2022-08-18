@@ -53,8 +53,8 @@
             <td><a th:text="${program.created}"></a></td>
             <td><a th:text="${program.machine.machineName}"></a></td>
             <td><a th:text="${program.ugVersion}"></a></td>
-            <td><a class="nav-link active" th:href="${program.modelPath}">Открыть</a></td>
-            <td><a class="nav-link active" th:href="${program.programPath}">Открыть</a></td>
+            <td><a class="nav-link active" th:href="@{/viewPrt/(id=${program.id})}">Открыть</a></td>
+            <td><a class="nav-link active" th:href="@{/viewCNC/(id=${program.id})}">Открыть</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/operation_blank_view/(id=${program.id})}">Карта наладки</a>
             </td>
             <td><a class="btn btn-outline-dark" th:href="@{/operations/(id=${program.id})}">Список операций</a></td>

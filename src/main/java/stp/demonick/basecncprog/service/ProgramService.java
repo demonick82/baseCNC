@@ -84,13 +84,13 @@ public class ProgramService {
 
     }
 
-/*    public void openFile(String path) {
+    public void openFile(String path) {
         try {
             new ProcessBuilder("explorer.exe", path).start();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     private void deleteDirectory(Path path) {
         try {

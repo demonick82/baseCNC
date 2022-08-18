@@ -36,11 +36,6 @@
             <label for="name" class="form-label">Название</label>
             <input type="text" class="form-control" id="name" name="name">
         </div>
-        <p>Добавить чертеж</p>
-        <div class="mb-3">
-            <input class="form-control" type="file" id="fileDrawing" name="fileDrawing">
-        </div>
-
         <button type="submit" class="btn btn-primary">Добавить</button>
         <div th:if="${errorMessage!=null}" th:text="${errorMessage}"
              style="color:red; font-weight: bold; margin: 30px 0px;">

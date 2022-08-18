@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
@@ -18,6 +18,12 @@
     </a>
     <div class="row">
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item"  sec:authorize="hasAnyRole('ROLE_ADMIN')">
+          <a class="nav-link active" th:href="@{/}">Добавить чертеж</a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+          <a class="nav-link active" th:href="@{/}">Добавить техпроцесс</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link active" th:href="@{/}">Главная</a>
         </li>

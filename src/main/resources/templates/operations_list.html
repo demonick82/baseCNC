@@ -45,9 +45,11 @@
                 <th width="5%">Файл УП</th>
                 <th width="5%">Припуск</th>
                 <th width="6%">Припуск на дно</th>
+<!--
                 <th width="6%">Глубина резания</th>
+-->
                 <th width="7%">Инструмент</th>
-                <th width="4%">Номер</th>
+                <th width="4%">Номер инструмента</th>
                 <th width="7%">Параметры инструмента <br> Диаметр/вылет</th>
                 <th width="5%">Обороты</th>
                 <th width="5%">Подача</th>
@@ -65,7 +67,9 @@
                 <td><a th:text="${operation.programNumber}"></a></td>
                 <td><a th:text="${operation.stockPart}"></a></td>
                 <td><a th:text="${operation.stockFloor}"></a></td>
+<!--
                 <td>-</td>
+-->
                 <td><a th:text="${operation.tool.toolName}"></a></td>
                 <td><a th:text="'T'+${operation.tool.toolNumber}"></a></td>
 

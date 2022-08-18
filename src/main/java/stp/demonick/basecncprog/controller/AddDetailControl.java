@@ -26,10 +26,10 @@ public class AddDetailControl {
     }
 
     @PostMapping("/addDetail")
-    public String save(@ModelAttribute Detail detail, @RequestParam("fileDrawing") MultipartFile file,
+    public String save(@ModelAttribute Detail detail,
                        Model model) {
         try {
-            detailService.save(detail, file);
+            detailService.save(detail);
         } catch (RuntimeException e) {
             model.addAttribute("errorMessage", "Деталь уже существует");
         }
