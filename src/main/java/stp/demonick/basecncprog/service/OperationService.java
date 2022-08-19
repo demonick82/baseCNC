@@ -6,6 +6,8 @@ import stp.demonick.basecncprog.model.Operation;
 import stp.demonick.basecncprog.repository.OperationRepository;
 import stp.demonick.basecncprog.repository.ProgramRepository;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -20,8 +22,10 @@ public class OperationService {
 
 
     public List<Operation> findOperationsForProgramId(long id) {
-        return programRepository.findById(id)
+        List<Operation> operations=programRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Operations not found")).getOperations();
+        operations.sort(Comparator.comparing(Operation::getProgramNumber));
+        return operations;
     }
 
     public Operation findOperationById(long id) {

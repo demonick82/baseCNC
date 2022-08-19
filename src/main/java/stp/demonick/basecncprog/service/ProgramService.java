@@ -20,6 +20,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 
 @Service
 public class ProgramService {
@@ -46,7 +47,7 @@ public class ProgramService {
         this.startPath = startPath;
     }
 
-    public Collection<Program> findAllProgramForDetailId(long id) {
+    public List<Program> findAllProgramForDetailId(long id) {
         return detailRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("program not found")).getPrograms();
     }
