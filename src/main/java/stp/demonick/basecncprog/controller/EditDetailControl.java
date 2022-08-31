@@ -4,9 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import stp.demonick.basecncprog.service.DetailService;
 
 @Controller
+@SessionAttributes({"detail", "program"})
 public class EditDetailControl {
     private final DetailService detailService;
 

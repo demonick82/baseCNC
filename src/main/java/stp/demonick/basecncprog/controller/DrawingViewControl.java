@@ -16,11 +16,12 @@ import stp.demonick.basecncprog.service.DetailService;
 @Controller
 @SessionAttributes({"detail", "program"})
 public class DrawingViewControl {
+
+    private final DetailService detailService;
+
     public DrawingViewControl(DetailService detailService) {
         this.detailService = detailService;
     }
-
-    private final DetailService detailService;
 
 
     @GetMapping("/drawingView")

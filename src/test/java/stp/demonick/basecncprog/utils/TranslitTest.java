@@ -15,7 +15,7 @@ public class TranslitTest {
 
     @Test
     public void getTranslit() {
-        String test = "UPRD";
-        assertEquals(translit.setLatin("УПРД"), test);
+        String test = "YU";
+        assertEquals(translit.setLatin("Ю"), test);
     }
 }

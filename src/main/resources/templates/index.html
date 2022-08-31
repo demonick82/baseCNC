@@ -21,7 +21,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" th:href="@{/}">Главная</a>
                 </li>
-                <li class="nav-item"  sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN')">
                     <a class="nav-link active" th:href="@{/}">Добавить пользователя</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN')">
@@ -55,6 +55,7 @@
         <tr th:each="detail : ${details}">
             <td><a th:text="${detail.drawingNumber}"></a></td>
             <td><a th:text="${detail.name}"></a></td>
+
             <td><a class="nav-link active" th:href="@{/drawingView(id=${detail.id})}">Чертеж</a></td>
             <td><a class="nav-link active" th:href="@{/}">Техпроцесс</a></td>
             <td><a class="nav-link active" th:href="@{/programs/(id=${detail.id})}">Операции ЧПУ</a></td>

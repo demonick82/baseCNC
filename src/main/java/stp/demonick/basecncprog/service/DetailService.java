@@ -29,17 +29,6 @@ public class DetailService {
         return detailRepository.findByOrderByDrawingNumberAsc();
     }
 
-/*    public void save(Detail detail, MultipartFile file) {
-        String pathDrawing = Paths.get("D:\\work\\BaseCNC\\drawings", file.getOriginalFilename()).toString();
-        try (FileOutputStream fos = new FileOutputStream(pathDrawing)) {
-            fos.write(file.getBytes());
-            detail.setDrawing(new Drawing(pathDrawing.replace("\\", "/")));
-            detailRepository.save(detail);
-        } catch (IOException e) {
-            detailRepository.save(detail);
-            System.out.println("without drawing");
-        }
-    }*/
     public void save(Detail detail) {
         detailRepository.save(detail);
     }
