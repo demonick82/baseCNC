@@ -15,18 +15,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 @Service
 public class DetailService {
     private final DetailRepository detailRepository;
 
-    public DetailService(DetailRepository detailRepository ) {
+    public DetailService(DetailRepository detailRepository) {
         this.detailRepository = detailRepository;
     }
 
 
-    public Collection<Detail> findAllDetails() {
-        return detailRepository.findByOrderByDrawingNumberAsc();
+    public List<Detail> findAllDetails() {
+        List<Detail> details = detailRepository.findAll();
+        details.sort(Comparator.comparing(Detail::getDrawingNumber, String.CASE_INSENSITIVE_ORDER));
+        return details;
     }
 
     public void save(Detail detail) {
@@ -42,6 +46,7 @@ public class DetailService {
     public void deleteDetail(long id) {
         detailRepository.deleteById(id);
     }
+
     public byte[] downLoadDrawing(Detail detail) {
         try (FileInputStream fis = new FileInputStream(detail.getDrawing().getPath())) {
             return fis.readAllBytes();

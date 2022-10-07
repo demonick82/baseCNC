@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import stp.demonick.basecncprog.service.DetailService;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Controller
 public class IndexControl {
 
@@ -23,6 +25,7 @@ public class IndexControl {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("details", detailService.findAllDetails());
         model.addAttribute("username", auth.getName());
+        model.addAttribute("increment", new AtomicInteger(0));
         return "index";
     }
 

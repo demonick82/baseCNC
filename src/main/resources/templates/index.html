@@ -42,6 +42,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th scope="col">№ п.п.</th>
             <th scope="col">№ Чертежа</th>
             <th scope="col">Наименование</th>
             <th scope="col">Чертеж</th>
@@ -52,10 +53,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="detail : ${details}">
+        <tr th:each="detail : ${details} ", th:with="counter=${increment.incrementAndGet}" >
+            <td><a th:text="${counter}"></a></td>
             <td><a th:text="${detail.drawingNumber}"></a></td>
             <td><a th:text="${detail.name}"></a></td>
-
             <td><a class="nav-link active" th:href="@{/drawingView(id=${detail.id})}">Чертеж</a></td>
             <td><a class="nav-link active" th:href="@{/}">Техпроцесс</a></td>
             <td><a class="nav-link active" th:href="@{/programs/(id=${detail.id})}">Операции ЧПУ</a></td>

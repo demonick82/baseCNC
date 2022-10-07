@@ -44,4 +44,5 @@ public class Detail {
     public void addProgram(Program program) {
         programs.add(program);
     }
+
 }

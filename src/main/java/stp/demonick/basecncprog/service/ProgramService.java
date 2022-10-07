@@ -47,8 +47,10 @@ public class ProgramService {
     }
 
     public List<Program> findAllProgramForDetailId(long id) {
-        return detailRepository.findById(id).orElseThrow(
+        List<Program> programList = detailRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("program not found")).getPrograms();
+        programList.sort(Comparator.comparing(Program::getProgramName));
+        return programList;
     }
 
     public Program findProgramById(long id) {
@@ -110,7 +112,7 @@ public class ProgramService {
         if (Files.exists(fullPath)) {
             Path newPath = Paths.get(startPath.loadStartPath(), fullPath.getName(4).toString(),
                     fullPath.getName(5).toString(), fullPath.getName(6).toString(),
-                    fullPath.getName(7).toString(),fullPath.getName(8).toString());
+                    fullPath.getName(7).toString(), fullPath.getName(8).toString());
             deleteDirectory(newPath);
         }
         programRepository.delete(program);

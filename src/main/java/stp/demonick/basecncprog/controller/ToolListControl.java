@@ -28,7 +28,7 @@ public class ToolListControl {
         model.addAttribute("tapTools", toolsService.findCustomTool(id,x->x.equals("TapTool")));
         model.addAttribute("threadMillTools", toolsService.findCustomTool(id,x->x.equals("ThreadMillTool")));
         model.addAttribute("boreTools", toolsService.findCustomTool(id,x->x.equals("BoreTool")));
-        model.addAttribute("tCutterMills", toolsService.findCustomTool(id,x->x.equals("TCutterMill")));
+        model.addAttribute("tCutterMills", toolsService.findCustomTool(id,x->x.equals("TCutterMillTool")));
         return "tool_list";
     }
 }
