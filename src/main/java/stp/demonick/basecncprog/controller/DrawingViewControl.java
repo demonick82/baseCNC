@@ -31,12 +31,11 @@ public class DrawingViewControl {
     }
 
     @GetMapping("/viewDrawing/{detailId}")
-    public ResponseEntity<Resource> viewDrawing(@PathVariable("detailId") long id) {
+    public ResponseEntity<byte[]> viewDrawing(@PathVariable("detailId") long id) {
         byte[] img = detailService.downLoadDrawing(detailService.findDetailById(id));
         return ResponseEntity.ok()
-                .headers(new HttpHeaders())
                 .contentLength(img.length)
                 .contentType(MediaType.APPLICATION_PDF)
-                .body(new ByteArrayResource(img));
+                .body(img);
     }
 }
