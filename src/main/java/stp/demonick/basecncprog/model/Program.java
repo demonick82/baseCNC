@@ -24,7 +24,7 @@ public class Program {
 
     private LocalDate created;
     private LocalDate updated;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "machines_id")
     private Machine machine;
 
@@ -34,7 +34,7 @@ public class Program {
     private OperationBlank operationBlank;
 
     @EqualsAndHashCode.Exclude
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "programmers_id")
     private User user;
 
