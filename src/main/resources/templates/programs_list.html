@@ -29,6 +29,9 @@
     </div>
 </nav>
 <div class="container pt-3">
+    <div class="text-center">
+        <h4 th:text="${detail.drawingNumber} +  ' ' +${detail.name}"> </h4>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -36,7 +39,9 @@
             <th scope="col">Разработчик</th>
             <th scope="col">Дата создания</th>
             <th scope="col">Станок</th>
+<!--
             <th scope="col">Версия NX</th>
+-->
             <th scope="col">Файлы NX</th>
             <th scope="col">Файлы УП</th>
             <th scope="col">Карта наладки</th>
@@ -52,7 +57,9 @@
             <td><a th:text="${program.user.name}"></a></td>
             <td><a th:text="${program.created}"></a></td>
             <td><a th:text="${program.machine.machineName}"></a></td>
+<!--
             <td><a th:text="${program.ugVersion}"></a></td>
+-->
             <td><a class="nav-link active" th:href="@{/viewPrt/(id=${program.id})}">Открыть</a></td>
             <td><a class="nav-link active" th:href="@{/viewCNC/(id=${program.id})}">Открыть</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/operation_blank_view/(id=${program.id})}">Карта наладки</a>

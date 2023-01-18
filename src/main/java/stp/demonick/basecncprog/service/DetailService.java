@@ -1,20 +1,12 @@
 package stp.demonick.basecncprog.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import stp.demonick.basecncprog.exceptions.NotFoundException;
 import stp.demonick.basecncprog.model.Detail;
-import stp.demonick.basecncprog.model.Drawing;
-import stp.demonick.basecncprog.model.OperationBlank;
-import stp.demonick.basecncprog.model.Program;
 import stp.demonick.basecncprog.repository.DetailRepository;
-import stp.demonick.basecncprog.utils.Translit;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
