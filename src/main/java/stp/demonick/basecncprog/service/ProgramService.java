@@ -68,6 +68,7 @@ public class ProgramService {
             program.setUser(usersService.findByLogin(login));
             program.setMachine(machineService.findMachineByName(program.getMachine().getMachineName()));
             program.setCreated(LocalDate.now());
+            program.setFullInfFilePath(program.getProgramPath() + file.getOriginalFilename());
             Detail detail = detailRepository.findById(id).orElseThrow(
                     () -> new NotFoundException("detail not found"));
             detail.addProgram(program);
@@ -75,6 +76,7 @@ public class ProgramService {
                     program.getProgramName(), program.getMachine().getMachineName());
             String newCNCDir = copyFiles.copyCNCFiles(program.getModelPath(), login, program.getProgramPath(),
                     translit.setLatin(detail.getDrawingNumber()), program.getProgramName(), program.getMachine().getMachineName());
+            program.setFullModelPath(program.getModelPath());
             program.setModelPath(newPrtDir);
             program.setProgramPath(newCNCDir);
             detailRepository.save(detail);
@@ -83,7 +85,6 @@ public class ProgramService {
         } catch (IOException e) {
             System.out.println("Неверный формат файла");
         }
-
     }
 
     public void openFile(String path) {

@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface DetailRepository extends CrudRepository<Detail, Long> {
     List<Detail> findAll();
+
+    List<Detail> findByDrawingNumberContainingIgnoreCase( String name);
 }

@@ -30,7 +30,7 @@
 </nav>
 <div class="container pt-3">
     <div class="text-center">
-        <h4 th:text="${detail.drawingNumber} +  ' ' +${detail.name}"> </h4>
+        <h4 th:text="${detail.drawingNumber} +  ' ' +${detail.name}"></h4>
     </div>
     <table class="table table-striped">
         <thead>
@@ -39,14 +39,17 @@
             <th scope="col">Разработчик</th>
             <th scope="col">Дата создания</th>
             <th scope="col">Станок</th>
-<!--
-            <th scope="col">Версия NX</th>
--->
+            <!--
+                        <th scope="col">Версия NX</th>
+            -->
             <th scope="col">Файлы NX</th>
             <th scope="col">Файлы УП</th>
+            <th scope="col">Путь к модели</th>
+
             <th scope="col">Карта наладки</th>
             <th scope="col">Список операций</th>
             <th scope="col">Список инструмента</th>
+            <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN')">Обновить</th>
             <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN')">Удалить</th>
 
         </tr>
@@ -57,19 +60,24 @@
             <td><a th:text="${program.user.name}"></a></td>
             <td><a th:text="${program.created}"></a></td>
             <td><a th:text="${program.machine.machineName}"></a></td>
-<!--
-            <td><a th:text="${program.ugVersion}"></a></td>
--->
+            <!--
+                        <td><a th:text="${program.ugVersion}"></a></td>
+            -->
             <td><a class="nav-link active" th:href="@{/viewPrt/(id=${program.id})}">Открыть</a></td>
             <td><a class="nav-link active" th:href="@{/viewCNC/(id=${program.id})}">Открыть</a></td>
+            <td><a th:text="${program.fullModelPath}"></a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/operation_blank_view/(id=${program.id})}">Карта наладки</a>
             </td>
             <td><a class="btn btn-outline-dark" th:href="@{/operations/(id=${program.id})}">Список операций</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/tools/(id=${program.id})}">Список инструмента</a></td>
-            <td sec:authorize="hasAnyRole('ROLE_ADMIN')"><a class="btn btn-outline-dark"
-                                                            th:href="@{/deleteProgram/(id=${program.id})}">Удалить
-                программу</a>
+            <td sec:authorize="hasAnyRole('ROLE_ADMIN')" th:switch="${program.fullInfFilePath}">
+                <a class="btn btn-outline-dark disabled" th:case=null  th:href="@{/}">Обновить</a>
+                <a class="btn btn-outline-dark" th:case="*" th:href="@{/}">Обновить</a>
+
+            <td sec:authorize="hasAnyRole('ROLE_ADMIN')"><a class="btn btn-outline-dark "
+                                                            th:href="@{/deleteProgram/(id=${program.id})}">Удалить</a>
             </td>
+
         </tr>
         </tbody>
     </table>

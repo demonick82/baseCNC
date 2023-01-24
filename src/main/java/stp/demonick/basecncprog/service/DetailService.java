@@ -20,9 +20,7 @@ public class DetailService {
 
 
     public List<Detail> findAllDetails() {
-        List<Detail> details = detailRepository.findAll();
-        details.sort(Comparator.comparing(Detail::getDrawingNumber, String.CASE_INSENSITIVE_ORDER));
-        return details;
+        return sortingByNumber(detailRepository.findAll());
     }
 
     public void save(Detail detail) {
@@ -47,4 +45,12 @@ public class DetailService {
         }
     }
 
+    public List<Detail> findDetailByNumber(String number) {
+        return sortingByNumber(detailRepository.findByDrawingNumberContainingIgnoreCase(number));
+    }
+
+    private List<Detail> sortingByNumber(List<Detail> list) {
+        list.sort(Comparator.comparing(Detail::getDrawingNumber, String.CASE_INSENSITIVE_ORDER));
+        return list;
+    }
 }

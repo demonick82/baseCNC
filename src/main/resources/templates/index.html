@@ -19,8 +19,9 @@
         <div class="row">
             <ul class="navbar-nav ms-auto">
                 <li>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="№ чертежв" aria-label="Search">
+                    <form class="d-flex" method="GET" action="/findByNumber">
+                        <input class="form-control me-2" type="search" placeholder="№ чертежв" aria-label="Search"
+                               name="number">
                         <button class="btn btn-outline-secondary" type="submit">Поиск</button>
                     </form>
                 </li>
@@ -40,6 +41,9 @@
                     <a class="nav-link active" th:case="'anonymousUser'" th:href="@{/login}">Войти</a>
                     <a class="nav-link active" th:case="*" th:href="@{/logout}">Выйти</a>
                 </li>
+<!--                                <li class="nav-item">
+                                    <a class="nav-link active" th:href="@{/addProgramTest}">Добавить программу </a>
+                                </li>-->
             </ul>
         </div>
     </div>
@@ -52,7 +56,10 @@
             <th scope="col">№ Чертежа</th>
             <th scope="col">Наименование</th>
             <th scope="col">Чертеж</th>
-            <th scope="col">Техпроцесс</th>
+            <!--
+                        <th scope="col">Техпроцесс</th>
+            -->
+            <th scope="col">Модель</th>
             <th scope="col">Операции</th>
             <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN')">Редактировать</th>
             <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN')">Удалить</th>
@@ -63,8 +70,16 @@
             <td><a th:text="${counter}"></a></td>
             <td><a th:text="${detail.drawingNumber}"></a></td>
             <td><a th:text="${detail.name}"></a></td>
-            <td><a class="nav-link active" th:href="@{/drawingView(id=${detail.id})}">Чертеж</a></td>
-            <td><a class="nav-link active" th:href="@{/}">Техпроцесс</a></td>
+            <td th:switch="${detail.drawing}">
+                <a class="nav-link disabled" th:case=null th:href="@{/drawingView(id=${detail.id})}">Чертеж</a>
+                <a class="nav-link" th:case="" th:href="@{/drawingView(id=${detail.id})}">Чертеж</a>
+            </td>
+
+            <!--
+                        <td><a class="nav-link active" th:href="@{/}">Техпроцесс</a></td>
+            -->
+            <td><a class="nav-link disabled" th:href="@{/}">Модель</a></td>
+
             <td><a class="nav-link active" th:href="@{/programs/(id=${detail.id})}">Операции ЧПУ</a></td>
             <td sec:authorize="hasAnyRole('ROLE_ADMIN')"><a class="btn btn-outline-dark"
                                                             th:href="@{/editDetail/(id=${detail.id})}">Редактировать</a>

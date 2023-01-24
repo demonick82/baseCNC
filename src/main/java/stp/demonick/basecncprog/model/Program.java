@@ -21,6 +21,9 @@ public class Program {
     private String programPath;
     private String ugVersion;
     private String modelPath;
+    private String fullModelPath;
+    private String fullInfFilePath;
+
 
     private LocalDate created;
     private LocalDate updated;
@@ -43,7 +46,6 @@ public class Program {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "operations_id")
     private List<Operation> operations = new ArrayList<>();
-
 
     public void addOperation(Operation operation) {
         operations.add(operation);
