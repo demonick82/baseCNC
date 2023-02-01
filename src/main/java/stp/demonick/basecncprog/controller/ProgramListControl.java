@@ -30,7 +30,7 @@ public class ProgramListControl {
     @GetMapping("/viewPrt")
     public String viewPrtFiles(@RequestParam("id") long id, Model model) {
         String prtFolder = programService.findProgramById(id).getModelPath();
-        programService.openFile(prtFolder);
+        programService.openDirs(prtFolder);
         Detail detail = (Detail) model.getAttribute("detail");
         return "redirect:/programs/?id=" + detail.getId();
     }
@@ -38,7 +38,7 @@ public class ProgramListControl {
     @GetMapping("/viewCNC")
     public String viewCNCFiles(@RequestParam("id") long id, Model model) {
         String prtFolder = programService.findProgramById(id).getProgramPath();
-        programService.openFile(prtFolder);
+        programService.openDirs(prtFolder);
         Detail detail = (Detail) model.getAttribute("detail");
         return "redirect:/programs/?id=" + detail.getId();
     }

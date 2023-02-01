@@ -5,25 +5,45 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import stp.demonick.basecncprog.model.Detail;
+import stp.demonick.basecncprog.service.ProgramService;
 
 @Controller
+@SessionAttributes({"detail", "program"})
 public class ProgramController {
+    private final ProgramService programService;
 
-
-    @GetMapping({"/addProgramTest"})
-    public String addTest() {
-        return "add_pogramm_test";
+    public ProgramController(ProgramService programService) {
+        this.programService = programService;
     }
 
-    @PostMapping("/testUpload")
-    public String getFileTest(@RequestParam("file") MultipartFile file, @RequestParam("confirm1") String check) {
-        System.out.println(file.getOriginalFilename());
-        System.out.println("checkBox=" + check);
-        return "index";
+    @GetMapping({"/addProgram"})
+    public String add() {
+        return "add_pogramm";
+    }
+
+    @GetMapping({"/update_program"})
+    public String update(@RequestParam("id") long id, Model model) {
+        model.addAttribute("program", programService.findProgramById(id));
+        return "update_pogramm";
+    }
+
+    @PostMapping("/upload")
+    public String getFile(@RequestParam("file") MultipartFile file, Model model) {
+        Detail detail = (Detail) model.getAttribute("detail");
+        long id = detail.getId();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        programService.createProgram(file, id, auth.getName());
+        return "redirect:/programs/?id=" + id;
+    }
+
+    @PostMapping("/update_program")
+    public String updateProgram(@RequestParam("id") long id, @RequestParam("file") MultipartFile file) {
+        programService.updateProgram(id, file);
+        return "redirect:/index";
     }
 }

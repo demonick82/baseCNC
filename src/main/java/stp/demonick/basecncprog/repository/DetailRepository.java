@@ -10,5 +10,5 @@ import java.util.List;
 public interface DetailRepository extends CrudRepository<Detail, Long> {
     List<Detail> findAll();
 
-    List<Detail> findByDrawingNumberContainingIgnoreCase( String name);
+    List<Detail> findByDrawingNumberContainingIgnoreCase(String name);
 }

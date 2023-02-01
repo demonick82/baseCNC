@@ -24,7 +24,7 @@ public class Operation {
     private double cutDepth;
     private double machineTime;
     private String description;
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne (cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "tools_id")
     private Tool tool;
 

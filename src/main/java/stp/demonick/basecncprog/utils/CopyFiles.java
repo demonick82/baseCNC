@@ -18,24 +18,29 @@ public class CopyFiles {
         this.startPath = startPath;
     }
 
-    public String copyPrtFiles(String prtFileName, String username, String detailNumber, String operationName, String machineName) throws IOException {
+    public String createNewDir(String prtFileName, String username, String detailNumber, String operationName, String machineName, String folderName) {
         Path originalPrtPath = Paths.get(prtFileName);
         Path newPrtDir = Paths.get(startPath.loadStartPath(), detailNumber, username, operationName, machineName,
-                getPartName(originalPrtPath.getFileName()), "Part_Man");
-        Files.createDirectories(newPrtDir);
-        copyFiles(originalPrtPath.getParent(), newPrtDir);
+                getPartName(originalPrtPath.getFileName()), folderName);
         return newPrtDir.toString();
     }
 
-    public String copyCNCFiles(String prtFileName, String username, String cncDir, String detailNumber, String operationName, String machineName) throws IOException {
-        Path originalPrtPath = Paths.get(prtFileName);
-        Path originalCNCDir = Paths.get(cncDir);
-        Path newCNCDir = Paths.get(startPath.loadStartPath(), detailNumber, username, operationName, machineName,
-                getPartName(originalPrtPath.getFileName()), "CNC");
-        System.out.println(newCNCDir);
-        Files.createDirectories(newCNCDir);
-        copyFiles(originalCNCDir, newCNCDir);
-        return newCNCDir.toString();
+    public void copyNewFiles(String oldModelsDir, String oldCncDir, String newModelDir, String newCncDir) {
+        try {
+            Path newModelPath = Path.of(newModelDir);
+            Path newCncPath = Path.of(newCncDir);
+            Path oldModelPath = Path.of(oldModelsDir).getParent();
+            Path oldCncPath = Path.of(oldCncDir);
+
+            Files.createDirectories(newModelPath);
+            Files.createDirectories(newCncPath);
+            copyFiles(oldModelPath, newModelPath);
+            copyFiles(oldCncPath, newCncPath);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void copyFiles(Path oldPath, Path newPath) {

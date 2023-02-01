@@ -18,18 +18,4 @@ public class AddProgramControl {
     public AddProgramControl(ProgramService programService) {
         this.programService = programService;
     }
-
-    @GetMapping({"/addProgram"})
-    public String add() {
-        return "add_pogramm";
-    }
-
-    @PostMapping("/upload")
-    public String getFile(@RequestParam("file") MultipartFile file, Model model) {
-        Detail detail =(Detail) model.getAttribute("detail");
-        long id = detail.getId();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        programService.addProgram(file, id,auth.getName());
-        return "redirect:/programs/?id="+id;
-    }
 }

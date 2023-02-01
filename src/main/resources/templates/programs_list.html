@@ -71,8 +71,7 @@
             <td><a class="btn btn-outline-dark" th:href="@{/operations/(id=${program.id})}">Список операций</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/tools/(id=${program.id})}">Список инструмента</a></td>
             <td sec:authorize="hasAnyRole('ROLE_ADMIN')" th:switch="${program.fullInfFilePath}">
-                <a class="btn btn-outline-dark disabled" th:case=null  th:href="@{/}">Обновить</a>
-                <a class="btn btn-outline-dark" th:case="*" th:href="@{/}">Обновить</a>
+                <a class="btn btn-outline-dark" th:href="@{/update_program/(id=${program.id})}">Обновить</a>
 
             <td sec:authorize="hasAnyRole('ROLE_ADMIN')"><a class="btn btn-outline-dark "
                                                             th:href="@{/deleteProgram/(id=${program.id})}">Удалить</a>

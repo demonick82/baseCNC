@@ -8,10 +8,7 @@ import stp.demonick.basecncprog.model.Detail;
 import stp.demonick.basecncprog.model.Program;
 import stp.demonick.basecncprog.repository.DetailRepository;
 import stp.demonick.basecncprog.repository.ProgramRepository;
-import stp.demonick.basecncprog.utils.CopyFiles;
-import stp.demonick.basecncprog.utils.StartPath;
-import stp.demonick.basecncprog.utils.TextFormat;
-import stp.demonick.basecncprog.utils.Translit;
+import stp.demonick.basecncprog.utils.*;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -31,11 +28,12 @@ public class ProgramService {
     private final MachineService machineService;
     private final Translit translit;
     private final StartPath startPath;
+    private final MergeFiles mergeFiles;
 
 
     public ProgramService(DetailRepository detailRepository, ProgramRepository programRepository,
                           TextFormat format, CopyFiles copyFiles, UsersService usersService,
-                          MachineService machineService, Translit translit, StartPath startPath) {
+                          MachineService machineService, Translit translit, StartPath startPath, MergeFiles mergeFiles) {
         this.detailRepository = detailRepository;
         this.programRepository = programRepository;
         this.format = format;
@@ -44,6 +42,7 @@ public class ProgramService {
         this.machineService = machineService;
         this.translit = translit;
         this.startPath = startPath;
+        this.mergeFiles = mergeFiles;
     }
 
     public List<Program> findAllProgramForDetailId(long id) {
@@ -58,7 +57,7 @@ public class ProgramService {
                 () -> new NotFoundException("program not found"));
     }
 
-    public void addProgram(MultipartFile file, long id, String login) {
+    public void createProgram(MultipartFile file, long id, String login) {
         StringBuilder builder = new StringBuilder();
         ObjectMapper mapper = new ObjectMapper();
         try (InputStream inputStream = file.getInputStream()) {
@@ -72,13 +71,16 @@ public class ProgramService {
             Detail detail = detailRepository.findById(id).orElseThrow(
                     () -> new NotFoundException("detail not found"));
             detail.addProgram(program);
-            String newPrtDir = copyFiles.copyPrtFiles(program.getModelPath(), login, translit.setLatin(detail.getDrawingNumber()),
-                    program.getProgramName(), program.getMachine().getMachineName());
-            String newCNCDir = copyFiles.copyCNCFiles(program.getModelPath(), login, program.getProgramPath(),
-                    translit.setLatin(detail.getDrawingNumber()), program.getProgramName(), program.getMachine().getMachineName());
+
+            String newPrtDir = copyFiles.createNewDir(program.getModelPath(), login, translit.setLatin(detail.getDrawingNumber()),
+                    program.getProgramName(), program.getMachine().getMachineName(), "Part_Man");
+            String newCNCDir = copyFiles.createNewDir(program.getModelPath(), login, translit.setLatin(detail.getDrawingNumber()),
+                    program.getProgramName(), program.getMachine().getMachineName(), "CNC");
+            copyFiles.copyNewFiles(program.getModelPath(),program.getProgramPath(),newPrtDir,newCNCDir);
             program.setFullModelPath(program.getModelPath());
             program.setModelPath(newPrtDir);
             program.setProgramPath(newCNCDir);
+            mergeFiles.mergeFiles(newCNCDir);
             detailRepository.save(detail);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Выберете файл");
@@ -87,20 +89,31 @@ public class ProgramService {
         }
     }
 
-    public void openFile(String path) {
-        try {
-            new ProcessBuilder("explorer.exe", path).start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void saveProgram(Program program) {
+        programRepository.save(program);
     }
 
-    private void deleteDirectory(Path path) {
-        try {
-            Files.walk(path)
-                    .sorted(Comparator.reverseOrder())
-                    .map(Path::toFile)
-                    .forEach(File::delete);
+    public void updateProgram(long id, MultipartFile file) {
+        Program programUpdated = findProgramById(id);
+        StringBuilder builder = new StringBuilder();
+        ObjectMapper mapper = new ObjectMapper();
+        try (InputStream inputStream = file.getInputStream()) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "Cp1251"));
+            reader.lines().forEach(builder::append);
+            Program newProgram = mapper.readValue(format.updateJson(builder), Program.class);
+            programUpdated.setProgramName(newProgram.getProgramName());
+            programUpdated.setUgVersion(newProgram.getUgVersion());
+            programUpdated.setFullModelPath(newProgram.getModelPath());
+            programUpdated.setUpdated(LocalDate.now());
+            programUpdated.getOperations().clear();
+            programUpdated.getOperations().addAll(newProgram.getOperations());
+
+            clearDirectory(programUpdated.getModelPath());
+            copyFiles.copyNewFiles(newProgram.getModelPath(),newProgram.getProgramPath(),
+                    programUpdated.getModelPath(),programUpdated.getProgramPath());
+
+            programRepository.save(programUpdated);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -119,7 +132,29 @@ public class ProgramService {
         programRepository.delete(program);
     }
 
-    public void saveProgram(Program program) {
-        programRepository.save(program);
+    public void openDirs(String path) {
+        try {
+            new ProcessBuilder("explorer.exe", path).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearDirectory(String path) {
+        Path deletePath = Paths.get(path);
+        if (Files.exists(deletePath)) {
+            deleteDirectory(deletePath.getParent());
+        }
+    }
+
+    private void deleteDirectory(Path path) {
+        try {
+            Files.walk(path)
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
