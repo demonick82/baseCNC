@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import stp.demonick.basecncprog.service.DetailService;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -27,11 +26,5 @@ public class IndexControl {
         model.addAttribute("username", auth.getName());
         model.addAttribute("increment", new AtomicInteger(0));
         return "index";
-    }
-
-    @GetMapping("/deleteDetail")
-    public String deleteDetail(@RequestParam("id") long id) {
-        detailService.deleteDetail(id);
-        return "redirect:/";
     }
 }

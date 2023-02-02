@@ -8,6 +8,8 @@ import stp.demonick.basecncprog.model.Program;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Service
 public class OperationBlankService {
@@ -17,7 +19,8 @@ public class OperationBlankService {
         this.programService = programService;
     }
 
-    public void saveBlank(String comment, MultipartFile file, Program program) {
+    public void saveBlank(String comment, MultipartFile file, long id) {
+        Program program = programService.findProgramById(id);
         String path = program.getProgramPath() + "\\" + file.getOriginalFilename();
         try (FileOutputStream fos = new FileOutputStream(path)) {
             fos.write(file.getBytes());
@@ -34,5 +37,22 @@ public class OperationBlankService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateBlank(long id, String comment) {
+        Program program = programService.findProgramById(id);
+        program.getOperationBlank().setComment(comment);
+        programService.saveProgram(program);
+    }
+
+    public void deleteBlank(long id) {
+        Program program = programService.findProgramById(id);
+        try {
+            Files.delete(Path.of(program.getOperationBlank().getPath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        program.setOperationBlank(null);
+        programService.saveProgram(program);
     }
 }

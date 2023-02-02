@@ -66,7 +66,43 @@
             <td><a class="nav-link active" th:href="@{/viewPrt/(id=${program.id})}">Открыть</a></td>
             <td><a class="nav-link active" th:href="@{/viewCNC/(id=${program.id})}">Открыть</a></td>
             <td><a th:text="${program.fullModelPath}"></a></td>
-            <td><a class="btn btn-outline-dark" th:href="@{/operation_blank_view/(id=${program.id})}">Карта наладки</a>
+            <td>
+                <ul class="list-group">
+                    <li class="list-group-item" sec:authorize="hasAnyRole('ROLE_ADMIN')"
+                        th:switch="${program.operationBlank}">
+                        <a class="btn btn-outline-dark" th:case=null
+                           th:href="@{/operationBlankCreate/(id=${program.id})}"
+                        >создать</a>
+                        <a class="btn btn-outline-dark disabled" th:case="*"
+                           th:href="@{/}"
+                        >создать</a>
+                    </li>
+                    <li class="list-group-item"
+                        th:switch="${program.operationBlank}">
+                        <a class="btn btn-outline-dark disabled" th:case=null
+                           th:href="@{/operationBlankView/(id=${program.id})}">открыть</a>
+                        <a class="btn btn-outline-dark" th:case="*"
+                           th:href="@{/operationBlankView/(id=${program.id})}">открыть</a>
+                    </li>
+                    <li class="list-group-item" sec:authorize="hasAnyRole('ROLE_ADMIN')"
+                        th:switch="${program.operationBlank}">
+                        <a class="btn btn-outline-dark disabled" th:case=null
+                           th:href="@{/editOperationBlank/(id=${program.id})}"
+                        >редактировать</a>
+                        <a class="btn btn-outline-dark " th:case="*"
+                           th:href="@{/editOperationBlank/(id=${program.id})}"
+                        >редактировать</a>
+                    </li>
+                    <li class="list-group-item" sec:authorize="hasAnyRole('ROLE_ADMIN')"
+                        th:switch="${program.operationBlank}">
+                        <a class="btn btn-outline-dark disabled" th:case=null
+                           th:href="@{/deleteOperationBlank/(id=${program.id})}"
+                        >удалить</a>
+                        <a class="btn btn-outline-dark " th:case="*"
+                           th:href="@{/deleteOperationBlank/(id=${program.id})}"
+                        >удалить</a>
+                    </li>
+                </ul>
             </td>
             <td><a class="btn btn-outline-dark" th:href="@{/operations/(id=${program.id})}">Список операций</a></td>
             <td><a class="btn btn-outline-dark" th:href="@{/tools/(id=${program.id})}">Список инструмента</a></td>

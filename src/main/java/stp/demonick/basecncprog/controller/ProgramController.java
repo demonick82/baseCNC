@@ -33,7 +33,7 @@ public class ProgramController {
     }
 
     @PostMapping("/upload")
-    public String getFile(@RequestParam("file") MultipartFile file, Model model) {
+    public String createProgram(@RequestParam("file") MultipartFile file, Model model) {
         Detail detail = (Detail) model.getAttribute("detail");
         long id = detail.getId();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

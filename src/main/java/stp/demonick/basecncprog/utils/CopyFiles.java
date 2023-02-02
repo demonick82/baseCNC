@@ -40,7 +40,6 @@ public class CopyFiles {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void copyFiles(Path oldPath, Path newPath) {
