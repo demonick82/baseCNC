@@ -32,17 +32,44 @@
     </div>
 </nav>
 <div class="container pt-3">
-    <h4>Редактировать деталь</h4>
-    <form method="POST" th:action="@{/addDetail(id=${detail.id})}">
-        <div class="mb-3">
-            <label for="drawNumber" class="form-label">№ Чертежа</label>
-            <input type="text" class="form-control" id="drawNumber" name="drawingNumber"
-                   th:value="${detail.drawingNumber}">
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Название</label>
-            <input type="text" class="form-control" id="name" name="name" th:value="${detail.name}">
-        </div>
+    <h4>Редактировать операции</h4>
+    <form method="POST" th:action="@{/editOperation(id=${program.id})}">
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">
+                    №
+                </th>
+                <th scope="col">
+                    Наименование
+                </th>
+                <th scope="col">
+                    № программы
+                </th>
+                <th scope="col">
+                    Примечание
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="operation : ${operations}" , th:with="counter=${increment.incrementAndGet}">
+                <td>
+                    <a th:text="${counter}"></a>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="operationName" name="operationName"
+                           th:value="${operation.operationName}">
+                </td>
+                <td>
+                    <a th:text="${operation.programNumber}"></a>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="description" name="description"
+                           th:value="${operation.description}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <button type="submit" class="btn btn-primary">Изменить</button>
         <div th:if="${errorMessage!=null}" th:text="${errorMessage}"
              style="color:red; font-weight: bold; margin: 30px 0px;">

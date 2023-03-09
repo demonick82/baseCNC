@@ -104,7 +104,20 @@
                     </li>
                 </ul>
             </td>
-            <td><a class="btn btn-outline-dark" th:href="@{/operations/(id=${program.id})}">Список операций</a></td>
+            <td>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a class="btn btn-outline-dark"
+                           th:href="@{/operations/(id=${program.id})}"
+                        > Список операций</a>
+                    </li>
+                    <li class="list-group-item" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                        <a class="btn btn-outline-dark"
+                           th:href="@{/editOperation/(id=${program.id})}"
+                        > Редактировать</a>
+                    </li>
+                </ul>
+            </td>
             <td><a class="btn btn-outline-dark" th:href="@{/tools/(id=${program.id})}">Список инструмента</a></td>
             <td sec:authorize="hasAnyRole('ROLE_ADMIN')" th:switch="${program.fullInfFilePath}">
                 <a class="btn btn-outline-dark" th:href="@{/update_program/(id=${program.id})}">Обновить</a>

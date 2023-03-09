@@ -51,7 +51,7 @@ public class OperationBlankController {
     public String createOperationBlank(@RequestParam("id") long id,
                                        Model model) {
         model.addAttribute("program", programService.findProgramById(id));
-        return "operation_blank_create";
+        return "create_operation_blank";
     }
 
     @PostMapping("/addOperationBlank")
@@ -72,7 +72,7 @@ public class OperationBlankController {
     public String openEditOperationBlank(@RequestParam("id") long id,
                                          Model model) {
         model.addAttribute("program", programService.findProgramById(id));
-        return "operation_blank_edit";
+        return "edit_operation_blank";
     }
 
     @PostMapping("/editOperationBlank")

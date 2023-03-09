@@ -77,7 +77,8 @@
                 <td><a th:text="${operation.spindleSpeed}"></a></td>
                 <td><a th:text="${operation.feedRate}"></a></td>
                 <td><a th:text="${#numbers.formatDecimal(operation.machineTime,1,2)}"></a></td>
-                <td></td>
+                <td><a th:text="${operation.description}"></a></td>
+
             </tr>
             </tbody>
         </table>

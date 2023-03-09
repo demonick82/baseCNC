@@ -111,9 +111,8 @@ public class ProgramService {
             clearDirectory(programUpdated.getModelPath());
             copyFiles.copyNewFiles(newProgram.getModelPath(),newProgram.getProgramPath(),
                     programUpdated.getModelPath(),programUpdated.getProgramPath());
-
+            mergeFiles.mergeFiles(programUpdated.getProgramPath());
             programRepository.save(programUpdated);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

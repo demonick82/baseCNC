@@ -9,7 +9,7 @@ import stp.demonick.basecncprog.service.DetailService;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
-@SessionAttributes({"detail", "program"})
+//@SessionAttributes({"detail", "program"})
 public class DetailController {
 
     private final DetailService detailService;
@@ -18,12 +18,10 @@ public class DetailController {
         this.detailService = detailService;
     }
 
-
     @GetMapping({"/newDetail"})
     public String addDetail() {
-        return "add_detail";
+        return "create_detail";
     }
-
 
     @PostMapping("/addDetail")
     public String save(@ModelAttribute Detail detail,

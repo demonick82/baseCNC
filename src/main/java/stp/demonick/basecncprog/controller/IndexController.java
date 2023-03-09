@@ -10,12 +10,12 @@ import stp.demonick.basecncprog.service.DetailService;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
-public class IndexControl {
+public class IndexController {
 
     private final DetailService detailService;
 
 
-    public IndexControl(DetailService modelService) {
+    public IndexController(DetailService modelService) {
         this.detailService = modelService;
     }
 

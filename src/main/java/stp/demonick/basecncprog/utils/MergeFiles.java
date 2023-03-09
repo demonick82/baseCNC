@@ -48,6 +48,6 @@ public class MergeFiles {
 
     public static void main(String[] args) {
         MergeFiles mergeFiles = new MergeFiles();
-        mergeFiles.mergeFiles("C:\\Users\\stpuser11\\Desktop\\Новая папка (2)");
+        mergeFiles.mergeFiles("X:\\26 PROGRAMMING\\Ugs\\Work_STP\\Work_STP\\941-5310-049\\polyanskiy\\OP_10\\Wele AA1165\\941-5310-049_op10\\CNC");
     }
 }

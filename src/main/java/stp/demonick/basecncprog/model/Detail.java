@@ -32,6 +32,11 @@ public class Detail {
     @JoinColumn(name = "drawings_id")
     private Drawing drawing;
 
+    @EqualsAndHashCode.Exclude
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "model3d_id")
+    private Model3D model3D;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "details_id")
     private List<TechnologicalProcess> technologicalProcesses = new ArrayList<>();
