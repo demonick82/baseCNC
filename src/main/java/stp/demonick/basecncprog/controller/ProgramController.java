@@ -52,9 +52,11 @@ public class ProgramController {
     }
 
     @PostMapping("/update_program")
-    public String updateProgram(@RequestParam("id") long id, @RequestParam("file") MultipartFile file) {
+    public String updateProgram(@RequestParam("id") long id, @RequestParam("file") MultipartFile file, Model model) {
         programService.updateProgram(id, file);
-        return "redirect:/index";
+        Detail detail = (Detail) model.getAttribute("detail");
+        long idd = detail.getId();
+        return "redirect:/programs/?id=" + idd;
     }
 
     @GetMapping("/deleteProgram")

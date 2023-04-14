@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import stp.demonick.basecncprog.service.ToolsService;
 
 @Controller
-@SessionAttributes(value = "detail")
+@SessionAttributes(value = {"detail", "program"})
 public class ToolController {
 
     private final ToolsService toolsService;

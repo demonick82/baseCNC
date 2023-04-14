@@ -39,6 +39,6 @@ public abstract class Tool {
     private int fluteNumber;
 
     public void setToolName(String toolName) {
-        this.toolName = toolName.replace("_", " ");
+        this.toolName = toolName;
     }
 }
